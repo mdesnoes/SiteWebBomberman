@@ -3,7 +3,11 @@
 /build
 
 # librairie
-/WebContent/WEB-INF/bin
+/WebContent/WEB-INF/lib
+
+.classpath
+.project
+.settings/
 
 # Compiled class file
 *.class
