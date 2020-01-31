@@ -1,4 +1,4 @@
-package com.beans;
+package com.projetJEE.beans;
 
 public class Utilisateur {
 	

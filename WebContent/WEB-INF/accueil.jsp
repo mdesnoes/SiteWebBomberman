@@ -18,7 +18,6 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<script src="js/myJavaScript.js"></script>
 </head>
 <body>
 
@@ -31,14 +30,12 @@
 			
 				<!-- On verifie que l'utilisateur a un compte -->
 				<c:choose>
-					<c:when test="${ aUnCompte }">
-						<p id="informationsConnexion"></p>
-						<!-- On verifie que les sessions sont présente et on remplie le <p> ci dessus -->
-						<script>verificationSessionDejaOuverte();</script>
+					<c:when test="${!empty sessionScope.sessionUtilisateur }">
+						<p>Vous êtes connecté sous le pseudo <u><c:out value="${ sessionScope.sessionUtilisateur.pseudo }" /></u></p>
 					</c:when>
 					
-					<c:when test="${ !aUnCompte }">
-						<p id="informationsConnexion">Vous n'êtes pas connecté</p>
+					<c:when test="${empty sessionScope.sessionUtilisateur }">
+						<p>Vous n'êtes pas connecté</p>
 					</c:when>
 				</c:choose>
 				
@@ -49,14 +46,18 @@
 				  	<a href="creationCompte">
 				  		<button type="button" class="btn btn-primary">Créer compte&nbsp;<i class="fas fa-user-plus"></i></button>
 				  	</a>
-					<a href="consultationCompte">
-						<button type="button" class="btn btn-primary" id="btnMonCompte" disabled="disabled" title="Vous devez être connecté !">Mon compte&nbsp;<i class="fas fa-user-cog"></i></button>
-					</a>
-					<a href="accueil">
-						<button type="button" class="btn btn-primary" id="btnDeconnexion" disabled="disabled" title="Vous devez être connecté !" onclick="deconnexion();">Deconnexion&nbsp;<i class="fas fa-user-times"></i></button>
-					</a>
+				  	
+					<form method="post" action="<c:url value="/consultationCompte" />">
+						<button type="submit" class="btn btn-primary" id="btnMonCompte">Mon compte&nbsp;<i class="fas fa-user-cog"></i></button>
+					</form>
 					
-					<script> activerBouton(); </script>
+<!-- 					Bouton de deconnexion -->
+					<form method="post" action="<c:url value="/deconnexion" />">
+						<button type="submit" class="btn btn-primary" id="btnDeconnexion" disabled="disabled" title="Vous devez être connecté !">Deconnexion&nbsp;<i class="fas fa-user-times"></i></button>
+					</form>
+					<c:if test="${!empty sessionUtilisateur }">
+							<script> $("#btnDeconnexion").removeAttr("disabled"); </script>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -100,7 +101,10 @@
 					<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
 					<p>Ici vous pouvez consultez l'historique</p>
 					<br />
-					<p>Merci de vous connecter pour accéder à l'historique</p>
+					
+					<c:if test="${empty sessionUtilisateur }">
+						<p>Merci de vous connecter pour accéder à l'historique</p>
+					</c:if>
 				</div>
 				
 				<div class="col-xs-12 col-sm-12 col-md-2" ></div>
@@ -118,33 +122,7 @@
 	
 	<!-- Modal -->
 	<div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-	    	<div class="modal-content">
-	      		<div class="modal-header">
-	        		<h5 class="modal-title">Se connecter</h5>
-	        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          				<span aria-hidden="true">&times;</span>
-	        			</button>
-	      		</div>
-	      		<form method="post" action="accueil">
-		      		<div class="modal-body">
-			        		<div class="form-group">
-		            			<label for="pseudo" class="col-form-label">Nom d'utilisateur :</label>
-		            			<input type="text" class="form-control" id="pseudo" />
-		          			</div>
-		         			<div class="form-group">
-		            			<label for="password" class="col-form-label">Mot de passe :</label>
-		            			<input type="password" class="form-control" id="password" />
-		          			</div>
-		      		</div>
-		      		<div class="modal-footer">
-		        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-		        		<button type="submit" class="btn btn-primary" onclick="creationCookie();">Connexion</button>
-		      		</div>
-	      		</form>
-	      		
-	    	</div>
-	  	</div>
+			<c:import url="inc/connexion.jsp" />
 	</div>
 	
 </body>
