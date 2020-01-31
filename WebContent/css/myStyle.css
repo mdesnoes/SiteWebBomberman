@@ -70,3 +70,14 @@
 	background-color: #D2D5D7;
 	height:192px;
 }
+
+.bandeauConsultationCompteInterdit {
+	background-color: #D2D5D7;
+	height:682px;
+	font-size:25px;
+	text-align:center;
+}
+
+.erreur {
+	color: #900;
+}

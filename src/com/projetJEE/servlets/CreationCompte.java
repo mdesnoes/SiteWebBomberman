@@ -1,4 +1,4 @@
-package com.servlets;
+package com.projetJEE.servlets;
 
 
 import java.io.IOException;
