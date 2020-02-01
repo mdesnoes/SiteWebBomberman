@@ -67,5 +67,12 @@ public class Utilisateur {
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
+	@Override
+	public String toString() {
+		return "Utilisateur [pseudo=" + pseudo + ", password=" + password + ", nom=" + nom + ", prenom=" + prenom
+				+ ", email=" + email + ", dateNaissance=" + dateNaissance + ", adresse=" + adresse + ", ville=" + ville
+				+ ", codePostal=" + codePostal + "]";
+	}
 
+	
 }

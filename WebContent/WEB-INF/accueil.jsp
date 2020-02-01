@@ -24,7 +24,7 @@
 	<div class="container-fluid enTete">
 		<div class="row">
 			<div class="col-md-1">
-				<img alt="" src="img/logoUA.png" id="imgLogo">
+				<img src="img/logoUA.png" id="imgLogo" alt="" />
 			</div>
 			<div class="col-md-6" style="text-align:right;">
 			
@@ -47,9 +47,9 @@
 				  		<button type="button" class="btn btn-primary">Créer compte&nbsp;<i class="fas fa-user-plus"></i></button>
 				  	</a>
 				  	
-					<form method="post" action="<c:url value="/consultationCompte" />">
-						<button type="submit" class="btn btn-primary" id="btnMonCompte">Mon compte&nbsp;<i class="fas fa-user-cog"></i></button>
-					</form>
+				  	<a href="consultationCompte">
+				  		<button type="submit" class="btn btn-primary" id="btnMonCompte">Mon compte&nbsp;<i class="fas fa-user-cog"></i></button>
+					</a>
 					
 <!-- 					Bouton de deconnexion -->
 					<form method="post" action="<c:url value="/deconnexion" />">
@@ -95,26 +95,25 @@
 	</div>
 	
 	<div class="container-fluid" style="background-image: url(img/plateau_bomberman.png); background-size: contain;">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-5" id="historique">
-					<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
-					<p>Ici vous pouvez consultez l'historique</p>
-					<br />
-					
-					<c:if test="${empty sessionUtilisateur }">
-						<p>Merci de vous connecter pour accéder à l'historique</p>
-					</c:if>
-				</div>
-				
-				<div class="col-xs-12 col-sm-12 col-md-2" ></div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-1" ></div>
 			
-				<div class="col-xs-12 col-sm-12 col-md-5" id="classement">
-					<h3 style="text-align:center">Classement <i class="fas fa-poll"></i></h3>
-					<p>Ici vous pouvez consultez le classement des joueurs</p>
-					
-				</div>
+			<div class="col-xs-12 col-sm-12 col-md-5" id="historique">
+				<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
+				<p>Ici vous pouvez consultez l'historique</p>
+				<br />
+				
+				<c:if test="${empty sessionUtilisateur }">
+					<p>Merci de vous connecter pour accéder à l'historique</p>
+				</c:if>
 			</div>
+			
+			<div class="col-xs-12 col-sm-12 col-md-5" id="classement">
+				<h3 style="text-align:center">Classement <i class="fas fa-poll"></i></h3>
+				<p>Ici vous pouvez consultez le classement des joueurs</p>
+			</div>
+			
+			<div class="col-xs-12 col-sm-12 col-md-1" ></div>
 		</div>
 	</div>
 	
@@ -122,7 +121,7 @@
 	
 	<!-- Modal -->
 	<div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog">
-			<c:import url="inc/connexion.jsp" />
+			<c:import url="/WEB-INF/inc/modalConnexion.jsp" />
 	</div>
 	
 </body>

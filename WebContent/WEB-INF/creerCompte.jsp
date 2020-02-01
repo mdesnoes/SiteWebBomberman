@@ -71,7 +71,7 @@
 			</div>
 			
 			<div style="text-align:center;">
-		  		<button type="submit" class="btn btn-primary">Créer mon compte</button>
+		  		<button type="submit" class="btn btn-primary">Créer mon compte &nbsp; <i class="fas fa-plus"></i></button>
 		  	</div>
 		</form>
 	</div>

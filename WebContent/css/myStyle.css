@@ -47,12 +47,14 @@
 	background-color: #D2D5D7;
 	overflow:scroll;
 	height:380px;
+	margin-right:20px;
 }
 
 #classement {
 	background-color: #D2D5D7;
 	overflow:scroll;
 	height:380px;
+	margin-left:20px;
 }
 
 .formulaireCreationCompte {
@@ -61,21 +63,20 @@
 	margin-top:32px;
 }
 
-.formulaireModificationProfil {
+.couleurGrisClair {
 	background-color: #D2D5D7;
-	height:390px;
 }
 
-.bandeauAutresActions {
-	background-color: #D2D5D7;
-	height:192px;
-}
 
 .bandeauConsultationCompteInterdit {
 	background-color: #D2D5D7;
 	height:682px;
 	font-size:25px;
 	text-align:center;
+}
+
+.succes {
+	color: #090;
 }
 
 .erreur {

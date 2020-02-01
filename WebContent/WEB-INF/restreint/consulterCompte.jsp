@@ -16,80 +16,39 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body style="background-image: url(img/plateau_bomberman.png); background-size: contain;">
-	<c:import url="/WEB-INF/inc/retourAccueil.jsp" />
 	
+	<c:import url="/WEB-INF/inc/retourAccueil.jsp" />
+
+<!-- 	Partie Consultation Profil -->
 	<div class="container-fluid bandeauConsultationCompte">
 		<span style="font-size:30px;">
 			<i class="fas fa-chevron-right"></i>
-			<b>Modifier le profil de <c:out value="${ sessionScope.sessionUtilisateur.pseudo }"/></b>
+			<b>Profil de <c:out value="${ sessionScope.sessionUtilisateur.pseudo }" /></b>
+			<i class="fas fa-address-card"></i>
+		</span>
+	</div>
+	
+	<div class="container couleurGrisClair">
+		<c:import url="/WEB-INF/inc/consulterProfil.jsp" />
+	</div>
+
+<!-- 	Partie Modification Profil -->
+	<div class="container-fluid bandeauConsultationCompte">
+		<span style="font-size:30px;">
+			<i class="fas fa-chevron-right"></i>
+			<b>Modifier le profil</b>
 		</span>
 		&nbsp;
 		<i>Pour modifier votre profil, merci d'écrire les nouvelles informations puis cliquer sur modifier votre compte</i>
 	</div>
 	
 	
-	
-	<div class="container formulaireModificationProfil">
-		<form method="post" action="consultationCompte">
-			<div class="form-row">
-			  	<div class="form-group col-md-6">
-			    	<label for="pseudo">Nom d'utilisateur</label>
-			      	<input type="text" class="form-control" id="pseudo" value="" placeholder="nouveau nom d'utilisateur">
-			    </div>
-			    <div class="form-group col-md-6">
-			      	<label for="mdp">Mot de passe</label>
-			      	<input type="password" class="form-control" id="mdp" placeholder="nouveau mot de passe">
-			    </div>
-			</div>
-			
-			<div class="form-row">
-			  	<div class="form-group col-md-4">
-			    	<label for="nom">Nom</label>
-			      	<input type="text" class="form-control" id="nom" placeholder="nouveau nom">
-			    </div>
-			    <div class="form-group col-md-4">
-			      	<label for="prenom">Prénom</label>
-			      	<input type="text" class="form-control" id="prenom" placeholder="nouveau prénom">
-			    </div>
-			    <div class="form-group">
-			    	<label for="datenaissance">Date de naissance&nbsp;<i class="fas fa-calendar-alt"></i></label>
-    				<input type="date" class="form-control" id="datenaissance"/>
-            	</div>
-			</div>
-			  
-			<div class="form-group">
-			    <label for="email">Addresse e-mail&nbsp;<i class="fas fa-at"></i></label>
-			    <input type="text" class="form-control" id="email" placeholder="nouvelle adresse e-mail - ex : toto@example.com">
-			</div>
-			
-			
-			
-			<div class="form-row">
-			    <div class="form-group col-md-6">
-			      	<label for="adresse">Adresse <i class="fas fa-map-marker-alt"></i> (facultative)</label>
-			      	<input type="text" class="form-control" id="adresse" placeholder="nouveau numéro et/ou nouveau nom de la rue">
-				</div>
-				<div class="form-group col-md-4">
-					<label for="cp">Code postal</label>
-			     	<input type="text" class="form-control" id="cp" placeholder="nouveau code postal"/>
-				</div>
-				<div class="form-group col-md-2">
-					<label for="ville">Ville</label>
-			      	<input type="text" class="form-control" id="ville" placeholder="nouvelle ville"/>
-			    </div>
-			</div>
-			
-			<div style="text-align:center;">
-		  		<button type="button" class="btn btn-primary" id="btnModif" data-toggle="modal" data-target="#modalModificationCompte">Modifier votre compte</button>
-		  	</div>
-		  	
-		  	<!-- Modal Modification Compte -->
-			<div class="modal fade bd-example-modal-lg" id="modalModificationCompte" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-				<c:import url="/WEB-INF/inc/modificationCompte.jsp" />
-			</div>
-		</form>
+	<div class="container couleurGrisClair">
+		<c:import url="/WEB-INF/inc/formulaireModificationProfil.jsp" />
 	</div>
 	
+	
+<!-- 	Partie Autres actions -->
 	<div class="container-fluid bandeauConsultationCompte">
 		<span style="font-size:30px;">
 			<i class="fas fa-chevron-right"></i>
@@ -97,41 +56,30 @@
 		</span>
 	</div>
 	
-	<div class="container bandeauAutresActions">
-		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalSuppressionCompte" style="margin-top:20px;">Supprimer mon compte <i class="fas fa-times"></i></button>
+	<div class="container couleurGrisClair">
+		<div class="form-row">
+		  	<div class="form-group col-md-3">
+				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalModificationMotDePasse" style="margin-top:20px;">Modifier mon mot de passe <i class="fas fa-lock-open"></i></button>
+			</div>
+			<div class="form-group col-md-3">
+					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalSuppressionCompte" style="margin-top:20px;">Supprimer mon compte <i class="fas fa-times"></i></button>
+			</div>
+		</div>
 	</div>
 	
 
 	<c:import url="/WEB-INF/inc/piedDePage.jsp" />
 	
 	
-	
-	
-	<!-- Modal -->
+	<!-- Modal Suppression Compte -->
 	<div class="modal fade" id="modalSuppressionCompte" tabindex="-1" role="dialog">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-	    	<div class="modal-content">
-	    		<div class="modal-header">
-	    			<i class="fas fa-exclamation-triangle"></i>
-        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          				<span aria-hidden="true">&times;</span>
-        			</button>
-	      		</div>
-	      		
-      			<div class="modal-body">
-	      			<p>Vous êtes sur le point de supprimer votre compte !</p>
-	      			<p><b>Voulez-vous continuer ?</b></p>
-	      		</div>
-		      		
-		      	<form method="post" action="suppressionCompte">
-		      		<div class="modal-footer">
-		        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-		        		<button type="submit" class="btn btn-primary">Supprimer mon compte</button>
-		      		</div>
-	      		</form>
-	      		
-	    	</div>
-	  	</div>
+		<c:import url="/WEB-INF/inc/modalSuppressionCompte.jsp" />
+	</div>
+	
+	
+	<!-- 	Modal Modif Mot de passe -->
+	<div class="modal fade" id="modalModificationMotDePasse" tabindex="-1" role="dialog">
+		<c:import url="/WEB-INF/inc/modalModificationMotDePasse.jsp" />
 	</div>
 	
 	
@@ -142,11 +90,6 @@
 			if($("form #pseudo").val() != "") {
  				$("#divModification").append("<p><i>Ancien pseudo :</i> <span style='color:#900'><c:out value='${ sessionScope.sessionUtilisateur.pseudo }'/> </span>" 
  					+ " &nbsp;<i class='fas fa-arrows-alt-h'></i>&nbsp; <i>Nouveau pseudo :</i> <span style='color:#090'>" + $("form #pseudo").val() + "</span></p>");
-			}
-			
-			if($("form #mdp").val() != "") {
- 				$("#divModification").append("<p><i>Ancien mot de passe :</i> <span style='color:#900'><c:out value='${ sessionScope.sessionUtilisateur.password }'/> </span>" 
- 					+ " &nbsp;<i class='fas fa-arrows-alt-h'></i>&nbsp; <i>Nouveau mot de passe :</i> <span style='color:#090'>" + $("form #mdp").val() + "</span></p>");
 			}
 			
 			if($("form #nom").val() != "") {
@@ -176,11 +119,7 @@
  					+ $("form #adresse").val() + " " + $("form #cp").val() + " " + $("form #ville").val() + "</span></p>");
 			}
 			
-		});
-  						
-          				
-          			
-          			
+		});			
     </script>
 	
 	

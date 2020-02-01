@@ -18,7 +18,7 @@
           				<span aria-hidden="true">&times;</span>
         			</button>
       		</div>
-      		<form method="post" action="connexion">
+      		<form method="post" action="accueil">
 	      		<div class="modal-body">
 		        		<div class="form-group">
 	            			<label for="pseudo" class="col-form-label">Nom d'utilisateur :</label>
