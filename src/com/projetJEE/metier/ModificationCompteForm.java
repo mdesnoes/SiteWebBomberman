@@ -57,7 +57,6 @@ public class ModificationCompteForm {
 				validationPseudo(pseudo);
 			}
 			catch(Exception e) {
-				System.out.println("ok");
 				erreurs.put(CHAMP_PSEUDO, e.getMessage());
 			}
 			newUtilisateur.setPseudo(pseudo);
@@ -150,6 +149,7 @@ public class ModificationCompteForm {
 		
 		if(erreurs.isEmpty()) {
 			
+			
 			//MODIFICATION DANS LA BASE DE DONNÉ
 			
 			
@@ -166,7 +166,7 @@ public class ModificationCompteForm {
 	
 	private void validationPseudo( String pseudo ) throws Exception {
     	if ( pseudo.length() < 2 ) {
-            throw new Exception( "Le nouveau pseudo doit contenir au moins 2 caractères" );
+            throw new Exception( "Le nouveau nom d'utilisateur doit contenir au moins 2 caractères" );
         }
     }
 	
@@ -195,8 +195,8 @@ public class ModificationCompteForm {
     }
     
     private void validationNewMdp( String newMdp) throws Exception {
-    	if ( newMdp.length() < 3 ) {
-            throw new Exception( "Le nouveau mot de passe doit contenir au moins 3 caractères" );
+    	if ( newMdp.length() < 5 ) {
+            throw new Exception( "Le nouveau mot de passe doit contenir au moins 5 caractères" );
         }
     }
     
@@ -213,7 +213,7 @@ public class ModificationCompteForm {
     }
     
     private void validationCodePostal( String cp ) throws Exception {
-    	if ( !cp.matches("^-?\\d+$") ) {
+    	if ( !cp.matches("^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$") ) {
             throw new Exception( "Merci de saisir un code postal valide" );
         }
     }

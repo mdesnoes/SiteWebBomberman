@@ -62,11 +62,11 @@ public class ConnexionForm {
 
     private void validationPassword( String password ) throws Exception {
         if ( password != null ) {
-            if ( password.length() < 3 ) {
-                throw new Exception( "Le mot de passe doit contenir au moins 3 caractères." );
+            if ( password.length() < 5 ) {
+                throw new Exception( "Le mot de passe doit contenir au moins 5 caractères" );
             }
         } else {
-            throw new Exception( "Merci de saisir votre mot de passe." );
+            throw new Exception( "Merci de saisir votre mot de passe" );
         }
     }
     
