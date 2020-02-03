@@ -17,7 +17,7 @@
        			</button>
       		</div>
       		
-     			<div class="modal-body">
+     		<div class="modal-body">
       			<p>Vous êtes sur le point de supprimer votre compte !</p>
       			<p><b>Voulez-vous continuer ?</b></p>
       		</div>

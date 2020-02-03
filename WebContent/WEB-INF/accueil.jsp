@@ -23,31 +23,36 @@
 
 	<div class="container-fluid enTete">
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-xs-12 col-sm-12 col-md-1">
 				<img src="img/logoUA.png" id="imgLogo" alt="" />
 			</div>
-			<div class="col-md-6" style="text-align:right;">
-			
-				<!-- On verifie que l'utilisateur a un compte -->
+			<div class="col-xs-12 col-sm-12 col-md-3" style="margin-top:8px;font-size:20px;">
+				<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${ form.resultat }</p>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-3" style="text-align:right;">
 				<c:choose>
 					<c:when test="${!empty sessionScope.sessionUtilisateur }">
 						<p>Vous êtes connecté sous le pseudo <u><c:out value="${ sessionScope.sessionUtilisateur.pseudo }" /></u></p>
 					</c:when>
 					
 					<c:when test="${empty sessionScope.sessionUtilisateur }">
-						<p>Vous n'êtes pas connecté</p>
+						<p>Vous n'êtes pas connecté <br />
+							<c:if test="${!empty requestScope.intervalleConnexions}">
+	                			<i style="font-size:13px;">Dernière connexion, il y a ${requestScope.intervalleConnexions}</i>
+	                		</c:if>
+                		</p>
 					</c:when>
 				</c:choose>
 				
 			</div>
-			<div class="col-md-5">
+			<div class="col-xs-12 col-sm-12 col-md-5">
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConnexion">Se connecter&nbsp;<i class="fas fa-user"></i></button>
-				  	<a href="creationCompte">
+				  	<a href="<c:url value="/creationCompte" />">
 				  		<button type="button" class="btn btn-primary">Créer compte&nbsp;<i class="fas fa-user-plus"></i></button>
 				  	</a>
 				  	
-				  	<a href="consultationCompte">
+				  	<a href="<c:url value="/consultationCompte" />">
 				  		<button type="submit" class="btn btn-primary" id="btnMonCompte">Mon compte&nbsp;<i class="fas fa-user-cog"></i></button>
 					</a>
 					
@@ -56,7 +61,7 @@
 						<button type="submit" class="btn btn-primary" id="btnDeconnexion" disabled="disabled" title="Vous devez être connecté !">Deconnexion&nbsp;<i class="fas fa-user-times"></i></button>
 					</form>
 					<c:if test="${!empty sessionUtilisateur }">
-							<script> $("#btnDeconnexion").removeAttr("disabled"); </script>
+						<script> $("#btnDeconnexion").removeAttr("disabled"); </script>
 					</c:if>
 				</div>
 			</div>
@@ -79,7 +84,7 @@
 					<p>
 						<i class="fa fa-arrow-circle-right"></i>
 						&nbsp;&nbsp;
-						<a href="Bomberman.zip" download>
+						<a href="<c:url value="/Bomberman.zip" />" download>
 							<button type="button" class="btn btn-warning btn-lg">Téléchargement du client <i class="fas fa-download"></i></button>
 						</a>
 						&nbsp;&nbsp;
@@ -121,7 +126,7 @@
 	
 	<!-- Modal -->
 	<div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog">
-			<c:import url="/WEB-INF/inc/modalConnexion.jsp" />
+		<c:import url="/WEB-INF/inc/modalConnexion.jsp" />
 	</div>
 	
 </body>

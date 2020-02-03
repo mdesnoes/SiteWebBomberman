@@ -30,6 +30,10 @@
 	            			<input type="password" class="form-control" id="password" name="password" value="" size="20" maxlength="20"/>
 	            			<span class="erreur">${form.erreurs['password']}</span>
 	          			</div>
+	          			<div class="form-group">
+	          				<label for="memoire">Se souvenir de moi&nbsp;</label>
+                			<input type="checkbox" id="memoire" name="memoire" />
+	          			</div>
 	      		</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
