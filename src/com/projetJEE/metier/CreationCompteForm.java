@@ -6,9 +6,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.projetJEE.beans.Utilisateur;
+import com.projetJEE.servlets.Accueil;
+import com.sun.istack.internal.logging.Logger;
 
 public class CreationCompteForm {
 	
+	final static Logger logger = Logger.getLogger(CreationCompteForm.class);
+
 	private static final String CHAMP_PSEUDO = "pseudo";
 	private static final String CHAMP_PASSWORD = "password";
     private static final String CHAMP_NOM = "nom";
@@ -99,8 +103,11 @@ public class CreationCompteForm {
 			
 			//AJOUT DANS LA BDD
 			
+			logger.info("Succès de la crétion du compte : " + utilisateur);
 			resultat = "Succès de la création du compte";
 		} else {
+			
+			logger.info("Echec de la crétion du compte : " + utilisateur);
 			resultat = "Echec de la création du compte";
 		}
 		

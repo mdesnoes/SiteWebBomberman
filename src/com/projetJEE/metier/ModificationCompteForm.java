@@ -6,8 +6,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.projetJEE.beans.Utilisateur;
+import com.sun.istack.internal.logging.Logger;
 
 public class ModificationCompteForm {
+	
+	final static Logger logger = Logger.getLogger(ModificationCompteForm.class);
 	
 	private static final String CHAMP_PSEUDO = "pseudo";
     private static final String CHAMP_NOM = "nom";
@@ -152,13 +155,13 @@ public class ModificationCompteForm {
 			
 			//MODIFICATION DANS LA BASE DE DONNÉ
 			
-			
+			logger.info("Succes de la modification du compte : \n Anciennes informations : " + utilisateur + "\n Nouvelles informations : " + newUtilisateur);
 			resultat = "Succes de la modification";
 			return newUtilisateur;
 		}
 		
 		resultat = "Echec de la modification";
-		System.out.println("Il y a eu des erreurs");
+		logger.info("Echec de la modification du compte : \n Anciennes informations : " + utilisateur + "\n Nouvelles informations : " + newUtilisateur);
 		return utilisateur;
 	}
 	

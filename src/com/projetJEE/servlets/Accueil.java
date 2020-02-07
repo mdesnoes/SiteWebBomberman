@@ -19,6 +19,7 @@ import org.joda.time.format.PeriodFormatterBuilder;
 
 import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.metier.ConnexionForm;
+import com.sun.istack.internal.logging.Logger;
 
 /**
  * Servlet implementation class Accueil
@@ -26,6 +27,9 @@ import com.projetJEE.metier.ConnexionForm;
 @WebServlet("/accueil")
 public class Accueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	final static Logger logger = Logger.getLogger(Accueil.class);
+	
 	
 	private static final String ATT_USER = "utilisateur";
 	private static final String ATT_FORM = "form";
@@ -77,11 +81,16 @@ public class Accueil extends HttpServlet {
 
         if ( form.getErreurs().isEmpty() ) {
             session.setAttribute( ATT_SESSION_USER, utilisateur );
+            
+			logger.info("Connexion réussie !");
         } else {
             session.setAttribute( ATT_SESSION_USER, null );
+            
+            logger.info("Connexion echouée !");
         }
         
         
+//        Gestion du cookie du temps de connexion
         if ( request.getParameter( CHAMP_MEMOIRE ) != null ) {
             DateTime dt = new DateTime();
             DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");

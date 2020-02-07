@@ -36,15 +36,12 @@ public class ConsultationCompte extends HttpServlet {
 		
 		// Le methode doPost est appelé quand l'utilisateur modifie son profil ou son mot de passe
         HttpSession session = request.getSession();
-		System.out.println("Actuel : " + session.getAttribute(ATT_SESSION_USER).toString());
 
 		ModificationCompteForm form = new ModificationCompteForm();
 		Utilisateur newUtilisateur = form.modificationCompteUtilisateur((Utilisateur) session.getAttribute(ATT_SESSION_USER), request);
 		
         session.setAttribute( ATT_SESSION_USER, newUtilisateur );
 		request.setAttribute(ATT_FORM, form);
-		
-		System.out.println("New : " + newUtilisateur.toString());
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/restreint/consulterCompte.jsp").forward(request, response);
 	}
