@@ -18,7 +18,10 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
 import com.projetJEE.beans.Utilisateur;
+import com.projetJEE.dao.DAOFactory;
+import com.projetJEE.dao.UtilisateurDao;
 import com.projetJEE.metier.ConnexionForm;
+import com.projetJEE.metier.MotDePasseEncryptor;
 import com.sun.istack.internal.logging.Logger;
 
 /**
@@ -42,12 +45,19 @@ public class Accueil extends HttpServlet {
 
     private static final String VUE = "/WEB-INF/accueil.jsp";
     
+    public static final String CONF_DAO_FACTORY = "daofactory";
+    private UtilisateurDao utilisateurDao;
+    
     public Accueil() {
         super();
     }
+    
+    public void init() throws ServletException {
+        this.utilisateurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getUtilisateurDao();
+    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		String derniereConnexion = getCookieValue( request, COOKIE_DERNIERE_CONNEXION );
         if ( derniereConnexion != null ) {
             DateTime dtCourante = new DateTime();
@@ -74,7 +84,7 @@ public class Accueil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 //		Verification de la connexion
-		ConnexionForm form = new ConnexionForm();
+		ConnexionForm form = new ConnexionForm(this.utilisateurDao);
         Utilisateur utilisateur = form.connecterUtilisateur( request );
 
         HttpSession session = request.getSession();
@@ -103,7 +113,7 @@ public class Accueil extends HttpServlet {
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
 
-		this.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 	
 	

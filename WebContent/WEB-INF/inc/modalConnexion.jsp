@@ -20,6 +20,7 @@
       		</div>
       		<form method="post" action="accueil">
 	      		<div class="modal-body">
+	      				<span class="erreur">${form.erreurs['donnee_incorrecte']}</span>
 		        		<div class="form-group">
 	            			<label for="pseudo" class="col-form-label">Nom d'utilisateur :</label>
 	            			<input type="text" class="form-control" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.pseudo}"/>" />

@@ -64,7 +64,7 @@
 			    </div>
 			    <div class="form-group col-md-6">
 			      	<label for="password">Mot de passe</label>
-			      	<input type="password" class="form-control" id="password" name="password" value="<c:out value="${ utilisateur.password }" />" oninput="verifSecuPassword();" placeholder="mot de passe">
+			      	<input type="password" class="form-control" id="password" name="password" value="" oninput="verifSecuPassword();" placeholder="mot de passe">
 			    	<span class="erreur">${form.erreurs['password']}</span>
 			    	<div class="progress">
   						<div class="progress-bar" role="progressbar" id="progressSecuPassword" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>

@@ -20,6 +20,12 @@
 	background-color: #818385;
 }
 
+.bandeauListeUtilisateur {
+	background-color: #D2D5D7;
+	overflow:scroll;
+	height:682px;
+}
+
 .piedDePage {
 	 height: 30px;
 	 background-color: #CDCFD1;
@@ -79,4 +85,8 @@
 
 .erreur {
 	color: #900;
+}
+
+h2 {
+	text-align:center;
 }
