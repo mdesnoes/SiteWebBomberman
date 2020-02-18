@@ -7,16 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class ConsultationCompteInterdit
- */
+
 @WebServlet("/consultationCompteInterdit")
 public class ConsultationCompteInterdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final String VUE = "/WEB-INF/consulterCompteInterdit.jsp";
+
     public ConsultationCompteInterdit() {
         super();
     }
@@ -24,7 +21,7 @@ public class ConsultationCompteInterdit extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		this.getServletContext().getRequestDispatcher("/WEB-INF/consulterCompteInterdit.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 	
 
