@@ -1,7 +1,7 @@
 
 -- Creation de la base
 
--- CREATE DATABASE bdd_bomberman DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- CREATE DATABASE bdd_bomberman DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 
 -- Creation de l'utilisateur de cette bdd
 

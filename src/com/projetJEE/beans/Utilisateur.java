@@ -99,5 +99,4 @@ public class Utilisateur implements Serializable {
 				+ ", codePostal=" + codePostal + "]";
 	}
 
-	
 }

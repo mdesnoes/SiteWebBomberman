@@ -6,16 +6,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-
-<!-- 	<script type="text/javascript" src="js/myJavaScript.js"></script> -->
-
 </head>
 <body>
 
 	<div class="modal-dialog modal-lg">
     	<div class="modal-content">
     		<div class="modal-header">
-        		<h5 class="modal-title">Merci de confirmer les modifications </h5>
+        		<h5 class="modal-title">Merci de confirmer les modifications</h5>
         			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           				<span aria-hidden="true">&times;</span>
         			</button>

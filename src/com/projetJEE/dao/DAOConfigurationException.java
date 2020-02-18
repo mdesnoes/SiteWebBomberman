@@ -1,8 +1,8 @@
 package com.projetJEE.dao;
 
 public class DAOConfigurationException extends RuntimeException {
-	private static final long serialVersionUID = 1L;
 	
+	private static final long serialVersionUID = 1L;
 	
 
 	public DAOConfigurationException( String message ) {

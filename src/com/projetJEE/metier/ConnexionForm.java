@@ -5,15 +5,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+
 import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.UtilisateurDao;
-import com.sun.istack.internal.logging.Logger;
 
 
 public class ConnexionForm {
 	
-	final static Logger logger = Logger.getLogger(CreationCompteForm.class);
-
+	final static Logger logger = Logger.getLogger(ConnexionForm.class);
 	
 	private static final String CHAMP_PSEUDO = "pseudo";
     private static final String CHAMP_PASSWORD = "password";
@@ -51,8 +51,8 @@ public class ConnexionForm {
         }
         
         Utilisateur utilisateur = utilisateurDao.trouver(SQL_SELECT_PAR_PSEUDO, pseudo);
-        if(utilisateur == null) {
-        	logger.info("Pseudo non trouvé dans la base de donnée");
+        if(!utilisateur.getPseudo().equals(pseudo)) {
+        	logger.info("Le pseudo " + pseudo + " n'a pas été trouvé dans la base de donnée");
             this.erreurs.put(CHAMP_DONNEE_INCORRECTE, "Votre pseudo est incorrect");
         } else {
             String passwordDechiffre = mdpEncryptor.decrypter( utilisateur.getPassword() );
@@ -63,13 +63,13 @@ public class ConnexionForm {
         	}
         }
 
-
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de la connexion.";
         } else {
             resultat = "Échec de la connexion.";
         }
 
+        utilisateur.setPseudo(pseudo); // On remet le pseudo incorrecte pour l'afficher
         return utilisateur;
     }
     

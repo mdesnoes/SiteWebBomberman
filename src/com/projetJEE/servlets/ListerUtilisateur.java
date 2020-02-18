@@ -19,6 +19,7 @@ import com.projetJEE.dao.UtilisateurDao;
 
 @WebServlet("/listerUtilisateur")
 public class ListerUtilisateur extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
     private static final String VUE = "/WEB-INF/listeUtilisateur.jsp";
@@ -36,18 +37,15 @@ public class ListerUtilisateur extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 
         HttpSession session = request.getSession();
 
-
-        
-            List<Utilisateur> listeUtilisateurs = this.utilisateurDao.lister();
-            Map<Long, Utilisateur> mapUtilisateurs = new HashMap<Long, Utilisateur>();
-            for ( Utilisateur utilisateur : listeUtilisateurs ) {
-            	mapUtilisateurs.put( utilisateur.getId(), utilisateur );
-            }
-            session.setAttribute( ATT_SESSION_LISTE_UTILISATEUR, mapUtilisateurs );
+        List<Utilisateur> listeUtilisateurs = this.utilisateurDao.lister();
+        Map<Long, Utilisateur> mapUtilisateurs = new HashMap<Long, Utilisateur>();
+        for ( Utilisateur utilisateur : listeUtilisateurs ) {
+        	mapUtilisateurs.put( utilisateur.getId(), utilisateur );
+        }
+        session.setAttribute( ATT_SESSION_LISTE_UTILISATEUR, mapUtilisateurs );
         
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response );
 	}

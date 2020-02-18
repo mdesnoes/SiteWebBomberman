@@ -22,7 +22,6 @@ public class ConsultationCompte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
     private static final String VUE = "/WEB-INF/restreint/consulterCompte.jsp";
-
 	private static final String ATT_FORM = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
 
@@ -45,7 +44,7 @@ public class ConsultationCompte extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Le methode doPost est appelé quand l'utilisateur modifie son profil ou son mot de passe
+		// Le methode doPost est appelée quand l'utilisateur modifie son profil ou son mot de passe
         HttpSession session = request.getSession();
 
 		ModificationCompteForm form = new ModificationCompteForm(this.utilisateurDao);

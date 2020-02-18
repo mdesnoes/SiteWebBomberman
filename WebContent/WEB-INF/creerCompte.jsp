@@ -17,12 +17,9 @@
 			var mdp = $("#password").val();
 			
 			var expChiffre = /\d+/; // contient au moins 1 chiffre
-			var expMajuscule = /[A-Z]+/; // contient caractere speciaux
+			var expMajuscule = /[A-Z]+/; // contient au moins une majuscule
 			var expCarSpeciaux = /\W/; // contient caractere speciaux
-			
-			if(expCarSpeciaux.test(mdp)) {
-				console.log("spec");
-			}
+
 			
 			if(expChiffre.test(mdp) && expMajuscule.test(mdp) && expCarSpeciaux.test(mdp)) {
 				$("#progressSecuPassword").attr("style","width: 100%;background-color:#25AE5F");

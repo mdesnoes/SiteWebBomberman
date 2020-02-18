@@ -26,7 +26,6 @@ public class ConsultationCompteFilter implements Filter {
 
   	
 	public void destroy() {
-		
 	}
 	
 	public void init(FilterConfig fConfig) throws ServletException {
@@ -37,9 +36,8 @@ public class ConsultationCompteFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
 
         HttpSession session = request.getSession();
-
         
-        // On redirige vers "/consultationCompteINterdit" si aucun utilisateur n'est connecté
+        // On redirige vers "/consultationCompteInterdit" si aucun utilisateur n'est connecté
         if ( session.getAttribute( ATT_SESSION_USER ) == null ) {
             response.sendRedirect( request.getContextPath() + ACCES_MON_COMPTE_INTERDIT );
         } else {
