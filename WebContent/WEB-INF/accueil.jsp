@@ -8,7 +8,6 @@
 	<title>Accueil Site Bomberman</title>
 
     <!-- CSS -->
-    
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/myStyle.css">
 	<link rel="stylesheet" href="icons/all.css">

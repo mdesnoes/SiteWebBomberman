@@ -20,7 +20,8 @@ import com.projetJEE.metier.CreationCompteForm;
 @WebServlet("/creationCompte")
 public class CreationCompte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+    private static final String VUE = "/WEB-INF/creerCompte.jsp";
 	private static final String ATT_FORM = "form";
     public static final String ATT_UTILISATEUR = "utilisateur";
     
@@ -38,7 +39,7 @@ public class CreationCompte extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/creerCompte.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 
 
@@ -50,7 +51,7 @@ public class CreationCompte extends HttpServlet {
         request.setAttribute(ATT_UTILISATEUR, utilisateur );
 		request.setAttribute(ATT_FORM, form);
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/creerCompte.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 
 }

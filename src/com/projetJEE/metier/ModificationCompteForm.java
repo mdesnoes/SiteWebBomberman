@@ -8,13 +8,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+
 import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.UtilisateurDao;
-import com.sun.istack.internal.logging.Logger;
 
 public class ModificationCompteForm {
 	
-	final static Logger logger = Logger.getLogger(ModificationCompteForm.class);
+	private final static Logger logger = Logger.getLogger(ModificationCompteForm.class);
 	
 	private static final String CHAMP_PSEUDO = "pseudo";
     private static final String CHAMP_NOM = "nom";
@@ -28,7 +29,9 @@ public class ModificationCompteForm {
     private static final String CHAMP_MDP_ACTUEL = "mdpActuel";
     private static final String CHAMP_NEW_MDP = "newMdp";
     private static final String CHAMP_CONFIRMER_NEW_MDP = "confirmerNewMdp";
-
+    
+    private static final String REGEX_EMAIL = "([^.@]+)(\\\\.[^.@]+)*@([^.@]+\\\\.)+([^.@]+)";
+    private static final String REGEX_CODE_POSTAL = "^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$";
     
 	private String resultat;
     private Map<String, String> erreurs = new HashMap<String, String>();
@@ -240,7 +243,7 @@ public class ModificationCompteForm {
     }
     
     private void validationEmail( String email ) throws FormValidationException {
-    	if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
+    	if ( !email.matches( REGEX_EMAIL ) ) {
             throw new FormValidationException( "Merci de saisir une adresse mail valide" );
         } else if ( utilisateurDao.trouver( SQL_SELECT_PAR_EMAIL, email ) != null ) {
             throw new FormValidationException( "Cette adresse email est déjà utilisée, merci d'en choisir une autre." );
@@ -248,7 +251,7 @@ public class ModificationCompteForm {
     }
     
     private void validationCodePostal( String cp ) throws FormValidationException {
-    	if ( !cp.matches("^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$") ) {
+    	if ( !cp.matches( REGEX_CODE_POSTAL ) ) {
             throw new FormValidationException( "Merci de saisir un code postal valide" );
         }
     }

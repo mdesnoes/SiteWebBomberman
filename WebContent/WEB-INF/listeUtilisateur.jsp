@@ -27,7 +27,7 @@
             <c:otherwise>
 	            <table class="table table-striped">
 	            	<thead class="thead-dark">
-	                	<tr><th>Pseudo</th><th>Date inscription</th><th>Nombre de victoires</th><th>Ratio de victoires</th><th>Classement</th></tr>                   
+	                	<tr><th>Pseudo</th><th>Date inscription</th><th>Nombre de victoires</th><th>Ratio de victoire</th><th>Classement</th></tr>                   
 					</thead>
 					
 	                <c:forEach items="${ sessionScope.listeUtilisateurs }" var="mapUtilisateurs" varStatus="boucle">
