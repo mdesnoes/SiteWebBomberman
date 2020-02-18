@@ -21,6 +21,8 @@ import com.projetJEE.metier.ModificationCompteForm;
 public class ConsultationCompte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
+    private static final String VUE = "/WEB-INF/restreint/consulterCompte.jsp";
+
 	private static final String ATT_FORM = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
 
@@ -38,7 +40,7 @@ public class ConsultationCompte extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		this.getServletContext().getRequestDispatcher("/WEB-INF/restreint/consulterCompte.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,7 +54,7 @@ public class ConsultationCompte extends HttpServlet {
         session.setAttribute( ATT_SESSION_USER, newUtilisateur );
 		request.setAttribute(ATT_FORM, form);
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/restreint/consulterCompte.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 
 }
