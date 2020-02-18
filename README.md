@@ -1,2 +1,2 @@
 # SiteWebBomberman
-Le JEE su projet Bomberman
+Le JEE sur projet Bomberman
