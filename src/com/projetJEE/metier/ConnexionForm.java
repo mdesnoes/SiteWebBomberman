@@ -51,16 +51,23 @@ public class ConnexionForm {
         }
         
         Utilisateur utilisateur = utilisateurDao.trouver(SQL_SELECT_PAR_PSEUDO, pseudo);
-        if(!utilisateur.getPseudo().equals(pseudo)) {
+        if(utilisateur != null) {
+	        if(!utilisateur.getPseudo().equals(pseudo)) {
+	        	logger.info("Le pseudo " + pseudo + " n'a pas été trouvé dans la base de donnée");
+	            this.erreurs.put(CHAMP_DONNEE_INCORRECTE, "Votre pseudo est incorrect");
+	            
+		        utilisateur.setPseudo(pseudo); // On remet le pseudo incorrecte pour l'afficher dans le modal de connexion
+	        } else {
+	            String passwordDechiffre = mdpEncryptor.decrypter( utilisateur.getPassword() );
+	        	
+	        	if(!password.equals(passwordDechiffre)) {
+	        		logger.info("Mot de passe incorrecte pour l'utilisateur " + pseudo);
+	                this.erreurs.put(CHAMP_DONNEE_INCORRECTE, "Votre mot de passe est incorrect");
+	        	}
+	        }
+	    } else {
         	logger.info("Le pseudo " + pseudo + " n'a pas été trouvé dans la base de donnée");
             this.erreurs.put(CHAMP_DONNEE_INCORRECTE, "Votre pseudo est incorrect");
-        } else {
-            String passwordDechiffre = mdpEncryptor.decrypter( utilisateur.getPassword() );
-        	
-        	if(!password.equals(passwordDechiffre)) {
-        		logger.info("Mot de passe incorrecte pour l'utilisateur " + pseudo);
-                this.erreurs.put(CHAMP_DONNEE_INCORRECTE, "Votre mot de passe est incorrect");
-        	}
         }
 
         if ( erreurs.isEmpty() ) {
@@ -69,8 +76,14 @@ public class ConnexionForm {
             resultat = "Échec de la connexion.";
         }
 
-        utilisateur.setPseudo(pseudo); // On remet le pseudo incorrecte pour l'afficher
-        return utilisateur;
+        // On retourne l'utilisateur trouvé en base de donnée ou un utilisateur avec le mauvais pseudo (pour l'affichage dans le modal de connexion)
+        Utilisateur utilisateurRetoure = new Utilisateur();
+        if(utilisateur != null) {
+        	utilisateurRetoure = utilisateur;
+        } else {
+        	utilisateurRetoure.setPseudo(pseudo);
+        }
+        return utilisateurRetoure;
     }
     
 
