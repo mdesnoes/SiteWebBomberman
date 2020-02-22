@@ -28,7 +28,7 @@ public class CreationCompteForm {
     private static final String CHAMP_CP = "cp";
     private static final String CHAMP_VILLE = "ville";
     
-    private static final String REGEX_EMAIL = "([^.@]+)(\\\\.[^.@]+)*@([^.@]+\\\\.)+([^.@]+)";
+    private static final String REGEX_EMAIL = "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)";
     private static final String REGEX_CODE_POSTAL = "^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$";
     
     private static final String PATTERN_DATE = "yyyy-mm-dd";

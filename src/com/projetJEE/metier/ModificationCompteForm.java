@@ -30,7 +30,7 @@ public class ModificationCompteForm {
     private static final String CHAMP_NEW_MDP = "newMdp";
     private static final String CHAMP_CONFIRMER_NEW_MDP = "confirmerNewMdp";
     
-    private static final String REGEX_EMAIL = "([^.@]+)(\\\\.[^.@]+)*@([^.@]+\\\\.)+([^.@]+)";
+    private static final String REGEX_EMAIL = "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)";
     private static final String REGEX_CODE_POSTAL = "^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$";
     
 	private String resultat;
