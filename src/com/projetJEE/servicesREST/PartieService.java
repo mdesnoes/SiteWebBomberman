@@ -16,7 +16,7 @@ import com.projetJEE.beans.Partie;
 import com.projetJEE.dao.DAOFactory;
 import com.projetJEE.dao.partie.PartieDao;
 
-@Path("/partie")
+@Path("/parties")
 public class PartieService {
 	
 	private final static Logger logger = Logger.getLogger(UtilisateurService.class);
@@ -29,7 +29,7 @@ public class PartieService {
     @Produces(MediaType.APPLICATION_JSON)
 	public List<Partie> get() {
         List<Partie> parties = this.partieDao.lister();
-        logger.info("Appel de l'API REST par la methode GET /partie");
+        logger.info("Appel de l'API REST par la methode GET /parties");
 		return parties;
 	}
 	
@@ -38,8 +38,9 @@ public class PartieService {
 	public Partie post(Partie partie) {
 		DateTime dateFin = DateTime.now();
 		partie.setDateFin(new Timestamp(dateFin.getMillis()));
+		
 		this.partieDao.creer(partie);
-        logger.info("Appel de l'API REST de partie par la methode POST /partie");
+        logger.info("Appel de l'API REST de partie par la methode POST /parties");
 		return partie;
 	}
 

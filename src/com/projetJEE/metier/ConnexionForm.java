@@ -50,6 +50,7 @@ public class ConnexionForm {
             this.erreurs.put(CHAMP_PASSWORD, e.getMessage());
         }
         
+        
         Utilisateur utilisateur = utilisateurDao.trouver(SQL_SELECT_PAR_PSEUDO, pseudo);
         if(utilisateur != null) {
 	        if(!utilisateur.getPseudo().equals(pseudo)) {
