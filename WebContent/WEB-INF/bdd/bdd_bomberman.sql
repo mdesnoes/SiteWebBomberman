@@ -8,9 +8,11 @@
 -- CREATE USER 'admin_bdd_bomberman'@'localhost' IDENTIFIED BY 'MdPBddBmbrmAn';
 -- GRANT ALL ON bdd_bomberman.* TO 'admin_bdd_bomberman'@'localhost' IDENTIFIED BY 'MdPBddBmbrmAn';
 
+-- Connexion à la base en local :
+-- mysql -u root -h localhost -p
 
 -- #### TABLE #### --
-DROP TABLE bdd_bomberman.Utilisateur CASCADE;
+-- DROP TABLE bdd_bomberman.Utilisateur CASCADE;
 
 CREATE TABLE  bdd_bomberman.Utilisateur (
 	id INT( 11 ) NOT NULL AUTO_INCREMENT,
@@ -28,5 +30,17 @@ CREATE TABLE  bdd_bomberman.Utilisateur (
 	PRIMARY KEY ( id ),
 	UNIQUE ( email ),
 	UNIQUE ( pseudo )
+) ENGINE = INNODB;
+
+
+-- DROP TABLE bdd_bomberman.Partie CASCADE;
+
+CREATE TABLE bdd_bomberman.Partie (
+	id INT( 11 ) NOT NULL AUTO_INCREMENT,
+	date_debut DATETIME NOT NULL,
+	date_fin DATETIME NOT NULL,
+	vainqueur VARCHAR( 30 ) NOT NULL,
+	
+	PRIMARY KEY ( id )
 ) ENGINE = INNODB;
 

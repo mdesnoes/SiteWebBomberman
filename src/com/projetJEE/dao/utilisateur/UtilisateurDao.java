@@ -1,8 +1,9 @@
-package com.projetJEE.dao;
+package com.projetJEE.dao.utilisateur;
 
 import java.util.List;
 
 import com.projetJEE.beans.Utilisateur;
+import com.projetJEE.dao.DAOException;
 
 public interface UtilisateurDao {
 	

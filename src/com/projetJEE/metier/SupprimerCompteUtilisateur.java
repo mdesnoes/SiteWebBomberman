@@ -1,7 +1,7 @@
 package com.projetJEE.metier;
 
 import com.projetJEE.beans.Utilisateur;
-import com.projetJEE.dao.UtilisateurDao;
+import com.projetJEE.dao.utilisateur.UtilisateurDao;
 
 public class SupprimerCompteUtilisateur {
 	    

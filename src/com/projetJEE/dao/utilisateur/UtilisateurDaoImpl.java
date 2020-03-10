@@ -1,4 +1,4 @@
-package com.projetJEE.dao;
+package com.projetJEE.dao.utilisateur;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.projetJEE.beans.Utilisateur;
+import com.projetJEE.dao.DAOException;
+import com.projetJEE.dao.DAOFactory;
 
 import static com.projetJEE.dao.DAOUtilitaire.*;
 

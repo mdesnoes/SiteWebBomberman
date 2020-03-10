@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOFactory;
-import com.projetJEE.dao.UtilisateurDao;
+import com.projetJEE.dao.utilisateur.UtilisateurDao;
 
 
 @WebServlet("/listerUtilisateur")

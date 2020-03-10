@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOFactory;
-import com.projetJEE.dao.UtilisateurDao;
+import com.projetJEE.dao.utilisateur.UtilisateurDao;
 
 
 @Path("/utilisateur")

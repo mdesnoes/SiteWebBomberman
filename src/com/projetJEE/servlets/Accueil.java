@@ -20,7 +20,7 @@ import org.joda.time.format.PeriodFormatterBuilder;
 
 import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOFactory;
-import com.projetJEE.dao.UtilisateurDao;
+import com.projetJEE.dao.utilisateur.UtilisateurDao;
 import com.projetJEE.metier.ConnexionForm;
 
 /**

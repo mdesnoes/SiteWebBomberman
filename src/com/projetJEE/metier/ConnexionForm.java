@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
 import com.projetJEE.beans.Utilisateur;
-import com.projetJEE.dao.UtilisateurDao;
+import com.projetJEE.dao.utilisateur.UtilisateurDao;
 
 
 public class ConnexionForm {

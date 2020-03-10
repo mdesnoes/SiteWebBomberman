@@ -7,6 +7,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.projetJEE.dao.partie.PartieDao;
+import com.projetJEE.dao.partie.PartieDaoImpl;
+import com.projetJEE.dao.utilisateur.UtilisateurDao;
+import com.projetJEE.dao.utilisateur.UtilisateurDaoImpl;
+
 
 public class DAOFactory {
 	
@@ -63,12 +68,16 @@ public class DAOFactory {
     }
 
     
-    Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         return DriverManager.getConnection( url, username, password );
     }
 
  
     public UtilisateurDao getUtilisateurDao() {
         return new UtilisateurDaoImpl( this );
+    }
+    
+    public PartieDao getPartieDao() {
+        return new PartieDaoImpl( this );
     }
 }
