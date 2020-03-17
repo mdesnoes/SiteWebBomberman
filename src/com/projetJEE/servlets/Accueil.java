@@ -1,6 +1,9 @@
 package com.projetJEE.servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +21,10 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
+import com.projetJEE.beans.Partie;
 import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOFactory;
+import com.projetJEE.dao.partie.PartieDao;
 import com.projetJEE.dao.utilisateur.UtilisateurDao;
 import com.projetJEE.metier.ConnexionForm;
 
@@ -38,6 +43,8 @@ public class Accueil extends HttpServlet {
 	private static final String ATT_FORM = "form";
 	private static final String ATT_SESSION_USER = "sessionUtilisateur";
 	private static final String  ATT_INTERVALLE_CONNEXIONS = "intervalleConnexions";
+    private static final String ATT_SESSION_LISTE_PARTIES = "listeParties";
+
 
     private static final String COOKIE_DERNIERE_CONNEXION = "derniereConnexion";
     private static final String  CHAMP_MEMOIRE = "memoire";
@@ -46,6 +53,7 @@ public class Accueil extends HttpServlet {
     
     public static final String CONF_DAO_FACTORY = "daofactory";
     private UtilisateurDao utilisateurDao;
+    private PartieDao partieDao;
     
     public Accueil() {
         super();
@@ -53,6 +61,7 @@ public class Accueil extends HttpServlet {
     
     public void init() throws ServletException {
         this.utilisateurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getUtilisateurDao();
+        this.partieDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPartieDao();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,6 +86,17 @@ public class Accueil extends HttpServlet {
             request.setAttribute( ATT_INTERVALLE_CONNEXIONS, intervalleConnexions );
         }
 		
+        
+        HttpSession session = request.getSession();
+
+        List<Partie> listeParties = this.partieDao.lister();
+        Map<Long, Partie> mapParties = new HashMap<Long, Partie>();
+        for ( Partie partie : listeParties ) {
+        	mapParties.put( partie.getId(), partie );
+        }
+        session.setAttribute( ATT_SESSION_LISTE_PARTIES, mapParties );
+        
+        
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 

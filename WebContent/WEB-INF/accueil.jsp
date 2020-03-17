@@ -104,12 +104,18 @@
 			
 			<div class="col-xs-12 col-sm-12 col-md-5" id="historique">
 				<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
-				<p>Ici vous pouvez consultez l'historique</p>
+				<p>Ici vous pouvez consultez l'historique des parties</p>
 				<br />
 				
-				<c:if test="${empty sessionUtilisateur }">
-					<p>Merci de vous connecter pour accéder à l'historique</p>
-				</c:if>
+				<c:choose>
+					<c:when test="${!empty sessionUtilisateur }">
+						<c:import url="inc/consulterHistorique.jsp" />
+					</c:when>
+					
+					<c:otherwise>
+						<p>Merci de vous connecter pour accéder à l'historique</p>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			
 			<div class="col-xs-12 col-sm-12 col-md-5" id="classement">
