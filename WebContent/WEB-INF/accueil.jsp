@@ -104,8 +104,12 @@
 			
 			<div class="col-xs-12 col-sm-12 col-md-5" id="historique">
 				<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
-				<p>Ici vous pouvez consultez l'historique des parties</p>
-				<br />
+				<div>
+					Ici vous pouvez consultez l'historique des parties
+					<a href="<c:url value="/accueil" />" style="float:right;">
+						<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
+					</a>
+				</div>
 				
 				<c:choose>
 					<c:when test="${!empty sessionUtilisateur }">
@@ -120,9 +124,16 @@
 			
 			<div class="col-xs-12 col-sm-12 col-md-5" id="classement">
 				<h3 style="text-align:center">Classement <i class="fas fa-poll"></i></h3>
-				<p>Ici vous pouvez consultez le classement des joueurs</p>
+				<div>
+					Ici vous pouvez consultez le classement des joueurs
+					<a href="<c:url value="/accueil" />" style="float:right;">
+						<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
+					</a>
+				</div>
+				
+				<c:import url="inc/consulterClassement.jsp" />
 			</div>
-			
+						
 			<div class="col-xs-12 col-sm-12 col-md-1" ></div>
 		</div>
 	</div>
