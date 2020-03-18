@@ -42,9 +42,13 @@ public class Accueil extends HttpServlet {
 	private static final String ATT_USER = "utilisateur";
 	private static final String ATT_FORM = "form";
 	private static final String ATT_SESSION_USER = "sessionUtilisateur";
-	private static final String  ATT_INTERVALLE_CONNEXIONS = "intervalleConnexions";
-    private static final String ATT_SESSION_LISTE_PARTIES = "listeParties";
-
+	private static final String ATT_INTERVALLE_CONNEXIONS = "intervalleConnexions";
+    private static final String ATT_LISTE_PARTIES = "listeParties";
+    private static final String ATT_MAP_CLASSEMENT = "mapClassement";
+    private static final String ATT_PERIODE = "periode";
+    private static final String ATT_TRIE_PAR = "triePar";
+    private static final String PARAM_PERIODE = "periode";
+    private static final String PARAM_TRIE_PAR = "triePar";
 
     private static final String COOKIE_DERNIERE_CONNEXION = "derniereConnexion";
     private static final String  CHAMP_MEMOIRE = "memoire";
@@ -85,16 +89,27 @@ public class Accueil extends HttpServlet {
 
             request.setAttribute( ATT_INTERVALLE_CONNEXIONS, intervalleConnexions );
         }
-		
-        
-        HttpSession session = request.getSession();
 
+        // Classement
+        String periode = (String) request.getParameter(PARAM_PERIODE);
+        String triePar = (String) request.getParameter(PARAM_TRIE_PAR);
+        Map<String, Integer> mapClassement = null;
+        if(periode != null && triePar != null) {
+            System.out.println(periode + " - " + triePar);
+
+        	mapClassement = this.partieDao.classer(periode, triePar);
+        }
+        request.setAttribute( ATT_MAP_CLASSEMENT, mapClassement );
+        request.setAttribute(ATT_PERIODE, periode);
+        request.setAttribute(ATT_TRIE_PAR, triePar);
+        
+        // Historique
         List<Partie> listeParties = this.partieDao.lister();
         Map<Long, Partie> mapParties = new HashMap<Long, Partie>();
         for ( Partie partie : listeParties ) {
         	mapParties.put( partie.getId(), partie );
         }
-        session.setAttribute( ATT_SESSION_LISTE_PARTIES, mapParties );
+        request.setAttribute( ATT_LISTE_PARTIES, mapParties );
         
         
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);

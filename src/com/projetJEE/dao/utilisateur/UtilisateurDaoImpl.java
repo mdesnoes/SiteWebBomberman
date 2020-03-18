@@ -79,14 +79,14 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	
 	@Override
     public List<Utilisateur> lister() throws DAOException {
-        Connection connection = null;
+        Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<Utilisateur> clients = new ArrayList<Utilisateur>();
 
         try {
-            connection = daoFactory.getConnection();
-            preparedStatement = connection.prepareStatement( SQL_SELECT_ALL_UTILISATEUR );
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement( SQL_SELECT_ALL_UTILISATEUR );
             resultSet = preparedStatement.executeQuery();
             while ( resultSet.next() ) {
                 clients.add( map( resultSet ) );
@@ -94,7 +94,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         } catch ( SQLException e ) {
             throw new DAOException( e );
         } finally {
-            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
 
         return clients;
