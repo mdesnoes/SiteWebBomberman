@@ -53,7 +53,7 @@
 	</div>
 	
 	<c:choose>
-        <c:when test="${ empty mapClassement }">
+        <c:when test="${ empty sessionScope.mapClassement }">
         	<p class="erreur">Aucune partie enregistrée</p>
     	</c:when>
     	<c:otherwise>
@@ -63,20 +63,20 @@
 		        		<th>Placement</th>
 		        		<th>Pseudo du joueur</th>
 		        		<c:choose>
-		        			<c:when test="${ triePar eq 'victoire' }">
+		        			<c:when test="${ sessionScope.triePar eq 'victoire' }">
 		        				<th>Nombre de victoire</th>
 		        			</c:when>
-		        			<c:when test="${ triePar eq 'defaite' }">
+		        			<c:when test="${ sessionScope.triePar eq 'defaite' }">
 		        				<th>Nombre de defaite</th>
 		        			</c:when>
-		        			<c:when test="${ triePar eq 'ratio' }">
+		        			<c:when test="${ sessionScope.triePar eq 'ratio' }">
 		        				<th>Ratio victoire/defaite</th>
 		        			</c:when>
 		        		</c:choose>
 		        	</tr>
 				</thead>
 		
-		        <c:forEach items="${ mapClassement }" var="mapClassement" varStatus="boucle">
+		        <c:forEach items="${ sessionScope.mapClassement }" var="mapClassement" varStatus="boucle">
 		        	<tr>
 			        	<c:choose>
 			        		<c:when test="${ boucle.index + 1 eq 1 }">
@@ -93,7 +93,10 @@
 			        		</c:otherwise>
 			        	</c:choose>
 		            	<td><c:out value="${ mapClassement.key }"/></td>
-		             	<td><c:out value="${ mapClassement.value }"/></td>
+		             	<td>
+		             		<c:out value="${ mapClassement.value }"/>
+		             		<c:if test="${ sessionScope.triePar eq 'ratio' }">%</c:if>
+		             	</td>
 		    	   </tr>
 		        </c:forEach>
 		    </table>

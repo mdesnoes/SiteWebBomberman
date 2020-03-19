@@ -48,10 +48,7 @@ public class Accueil extends HttpServlet {
     private static final String ATT_MAP_CLASSEMENT = "mapClassement";
     private static final String ATT_TRIE_PAR = "triePar";
     private static final String ATT_PERIODE = "periode";
-    
-    private static final String PARAM_PERIODE = "periode";
-    private static final String PARAM_TRIE_PAR = "triePar";
-    
+
     private static final String VICTOIRE = "victoire";
     private static final String DEFAITE = "defaite";
     private static final String RATIO = "ratio";
@@ -97,34 +94,14 @@ public class Accueil extends HttpServlet {
             request.setAttribute( ATT_INTERVALLE_CONNEXIONS, intervalleConnexions );
         }
 
-        // Classement
-        String periode = (String) request.getParameter(PARAM_PERIODE);
-        String triePar = (String) request.getParameter(PARAM_TRIE_PAR);
-        Map<String, Float> mapClassement = null;
         
-        if(periode == null && triePar == null) {
-        	periode = JOURNALIER;
-        	triePar = VICTOIRE;
-        }
+        HttpSession session = request.getSession();
+        gestionHistorique(session);
         
-        switch(triePar) {
-		    case VICTOIRE: mapClassement = this.partieDao.classerParVictoire(periode); break;
-		    case DEFAITE: mapClassement = this.partieDao.classerParDefaite(periode); break;
-		    case RATIO: mapClassement = this.partieDao.classerParRatio(periode); break;
-        }
-        request.setAttribute( ATT_MAP_CLASSEMENT, mapClassement );
-        request.setAttribute( ATT_TRIE_PAR, triePar );
-        request.setAttribute( ATT_PERIODE, periode);
-        
-        // Historique
-        List<Partie> listeParties = this.partieDao.lister();
-        Map<Long, Partie> mapParties = new HashMap<Long, Partie>();
-        for ( Partie partie : listeParties ) {
-        	mapParties.put( partie.getId(), partie );
-        }
-        request.setAttribute( ATT_LISTE_PARTIES, mapParties );
-        
-        
+        String periode = (String) request.getParameter( ATT_PERIODE );
+        String triePar = (String) request.getParameter( ATT_TRIE_PAR );
+        gestionClassement(session, periode, triePar);
+ 
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 
@@ -162,6 +139,32 @@ public class Accueil extends HttpServlet {
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 	
+	private void gestionHistorique(HttpSession session) {
+        List<Partie> listeParties = this.partieDao.lister();
+        Map<Long, Partie> mapParties = new HashMap<Long, Partie>();
+        for ( Partie partie : listeParties ) {
+        	mapParties.put( partie.getId(), partie );
+        }
+        session.setAttribute( ATT_LISTE_PARTIES, mapParties );
+	}
+	
+	private void gestionClassement(HttpSession session, String periode, String triePar) {
+        Map<String, Float> mapClassement = null;
+        
+        if(periode == null && triePar == null) {
+        	periode = JOURNALIER;
+        	triePar = VICTOIRE;
+        }
+        
+        switch(triePar) {
+		    case VICTOIRE: mapClassement = this.partieDao.classerParVictoire(periode); break;
+		    case DEFAITE: mapClassement = this.partieDao.classerParDefaite(periode); break;
+		    case RATIO: mapClassement = this.partieDao.classerParRatio(periode); break;
+        }
+        session.setAttribute( ATT_MAP_CLASSEMENT, mapClassement );
+        session.setAttribute( ATT_TRIE_PAR, triePar );
+        session.setAttribute( ATT_PERIODE, periode);
+	}
 	
 	
 	private static void setCookie( HttpServletResponse response, String nom, String valeur, int maxAge ) {

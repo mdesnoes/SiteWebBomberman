@@ -22,7 +22,9 @@ public class SuppressionCompte extends HttpServlet {
  
 	public static final String ACCUEIL= "/SiteWebBomberman/accueil";
 	private static final String ATT_SESSION_USER = "sessionUtilisateur";
-	
+    private static final String ATT_TRIE_PAR = "triePar";
+    private static final String ATT_PERIODE = "periode";
+    
 	public static final String CONF_DAO_FACTORY = "daofactory";
     private UtilisateurDao utilisateurDao;
 	
@@ -42,10 +44,13 @@ public class SuppressionCompte extends HttpServlet {
 		SupprimerCompteUtilisateur form = new SupprimerCompteUtilisateur(this.utilisateurDao);
 		form.supprimerCompteUtilisateur( (Utilisateur) session.getAttribute( ATT_SESSION_USER ));
 		
-		//On supprimer la session
+	    String periode = (String) session.getAttribute( ATT_PERIODE );
+		String triePar = (String) session.getAttribute( ATT_TRIE_PAR );
+		
 		session.invalidate();
         
-        response.sendRedirect( ACCUEIL );
+		
+        response.sendRedirect( ACCUEIL + "?periode=" + periode + "&triePar=" + triePar);
 	}
 
 }

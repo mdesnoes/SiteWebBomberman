@@ -97,41 +97,43 @@
 		</div>
 	</div>
 	
-	<div class="container-fluid">
-		<div class="row">
-			
-			<div class="col-xs-12 col-sm-12 col-md-6" id="historique">
-				<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
-				<div>
-					Ici vous pouvez consultez l'historique des parties
-					<a href="<c:url value="/accueil?periode=${ periode }&triePar=${ triePar }"/>" style="float:right;">
-						<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
-					</a>
-				</div>
+	<div style="background-image: url(img/plateau_bomberman.png); background-size: contain;">
+		<div class="container-fluid" style="width:1350px;">
+			<div class="row">
 				
-				<c:choose>
-					<c:when test="${!empty sessionUtilisateur }">
-						<c:import url="inc/consulterHistorique.jsp" />
-					</c:when>
+				<div class="col-xs-12 col-sm-12 col-md-6" id="historique">
+					<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
+					<div>
+						Ici vous pouvez consultez l'historique des parties
+						<a href="<c:url value="/accueil?periode=${ periode }&triePar=${ triePar }"/>" style="float:right;">
+							<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
+						</a>
+					</div>
 					
-					<c:otherwise>
-						<p>Merci de vous connecter pour accéder à l'historique</p>
-					</c:otherwise>
-				</c:choose>
-			</div>
-			
-			<div class="col-xs-12 col-sm-12 col-md-6" id="classement">
-				<h3 style="text-align:center">Classement <i class="fas fa-poll"></i></h3>
-				<div>
-					Ici vous pouvez consultez le classement des joueurs
-					<a href="<c:url value="/accueil?periode=${ periode }&triePar=${ triePar }"/>" style="float:right;">
-						<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
-					</a>
+					<c:choose>
+						<c:when test="${!empty sessionUtilisateur }">
+							<c:import url="inc/consulterHistorique.jsp" />
+						</c:when>
+						
+						<c:otherwise>
+							<p>Merci de vous connecter pour accéder à l'historique</p>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				
-				<c:import url="inc/consulterClassement.jsp" />
+				<div class="col-xs-12 col-sm-12 col-md-6" id="classement">
+					<h3 style="text-align:center">Classement <i class="fas fa-poll"></i></h3>
+					<div>
+						Ici vous pouvez consultez le classement des joueurs
+						<a href="<c:url value="/accueil?periode=${ periode }&triePar=${ triePar }"/>" style="float:right;">
+							<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
+						</a>
+					</div>
+					
+					<c:import url="inc/consulterClassement.jsp" />
+				</div>
+							
 			</div>
-						
 		</div>
 	</div>
 	

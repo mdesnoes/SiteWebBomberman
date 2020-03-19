@@ -17,7 +17,7 @@
 	<c:import url="/WEB-INF/inc/retourAccueil.jsp" />
 
 	<div class="container bandeauConsultationCompteInterdit">
-		<p><b>Vous devez vous <a href="accueil">connecter</a> pour accéder à votre compte</b></p>
+		<p><b>Vous devez vous <a href="accueil?periode=${ periode }&triePar=${ triePar }">connecter</a> pour accéder à votre compte</b></p>
 	</div>
 	
 	<c:import url="/WEB-INF/inc/piedDePage.jsp" />
