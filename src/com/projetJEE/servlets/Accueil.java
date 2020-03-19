@@ -95,8 +95,6 @@ public class Accueil extends HttpServlet {
         String triePar = (String) request.getParameter(PARAM_TRIE_PAR);
         Map<String, Integer> mapClassement = null;
         if(periode != null && triePar != null) {
-            System.out.println(periode + " - " + triePar);
-
         	mapClassement = this.partieDao.classer(periode, triePar);
         }
         request.setAttribute( ATT_MAP_CLASSEMENT, mapClassement );

@@ -75,10 +75,9 @@
 			<div class="col-xs-12 col-sm-12 col-md-6">
 			
 				<div class="div_telechargement">
-					<span style="font-size:60px"><b>Bienvenue !</b></span>
+					<span style="font-size:50px"><b>Bienvenue !</b></span>
 					<h3>Vous êtes sur le site du jeu Bomberman</h3>
 					
-					<br/>
 					<br/>
 					<p>
 						<i class="fa fa-arrow-circle-right"></i>
@@ -98,11 +97,10 @@
 		</div>
 	</div>
 	
-	<div class="container-fluid" style="background-image: url(img/plateau_bomberman.png); background-size: contain;">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-1" ></div>
 			
-			<div class="col-xs-12 col-sm-12 col-md-5" id="historique">
+			<div class="col-xs-12 col-sm-12 col-md-6" id="historique">
 				<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
 				<div>
 					Ici vous pouvez consultez l'historique des parties
@@ -122,7 +120,7 @@
 				</c:choose>
 			</div>
 			
-			<div class="col-xs-12 col-sm-12 col-md-5" id="classement">
+			<div class="col-xs-12 col-sm-12 col-md-6" id="classement">
 				<h3 style="text-align:center">Classement <i class="fas fa-poll"></i></h3>
 				<div>
 					Ici vous pouvez consultez le classement des joueurs
@@ -134,7 +132,6 @@
 				<c:import url="inc/consulterClassement.jsp" />
 			</div>
 						
-			<div class="col-xs-12 col-sm-12 col-md-1" ></div>
 		</div>
 	</div>
 	
