@@ -104,7 +104,7 @@
 				<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
 				<div>
 					Ici vous pouvez consultez l'historique des parties
-					<a href="<c:url value="/accueil" />" style="float:right;">
+					<a href="<c:url value="/accueil?periode=${ periode }&triePar=${ triePar }"/>" style="float:right;">
 						<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
 					</a>
 				</div>
@@ -124,7 +124,7 @@
 				<h3 style="text-align:center">Classement <i class="fas fa-poll"></i></h3>
 				<div>
 					Ici vous pouvez consultez le classement des joueurs
-					<a href="<c:url value="/accueil" />" style="float:right;">
+					<a href="<c:url value="/accueil?periode=${ periode }&triePar=${ triePar }"/>" style="float:right;">
 						<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
 					</a>
 				</div>

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<c:choose>
-        <c:when test="${ empty sessionScope.listeParties }">
+        <c:when test="${ empty listeParties }">
         	<p class="erreur">Aucune partie enregistrée</p>
     	</c:when>
     	<c:otherwise>
@@ -18,7 +18,7 @@
 		        	<tr><th>Id de la partie</th><th>Date de debut</th><th>Date de fin</th><th>Vainqueur</th></tr>                   
 				</thead>
 		
-		        <c:forEach items="${ sessionScope.listeParties }" var="mapParties" varStatus="boucle">
+		        <c:forEach items="${ listeParties }" var="mapParties" varStatus="boucle">
 		        	<tr>
 		            	<td><c:out value="${ mapParties.value.id }"></c:out></td>
 		             	<td><c:out value="${ mapParties.value.dateDebut }"></c:out></td>

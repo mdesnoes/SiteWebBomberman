@@ -59,7 +59,9 @@
     	<c:otherwise>
 			<table class="table table-striped">
 		    	<thead class="thead-dark">
-		        	<tr><th>Nom du joueur</th>
+		        	<tr>
+		        		<th>Placement</th>
+		        		<th>Pseudo du joueur</th>
 		        		<c:choose>
 		        			<c:when test="${ triePar eq 'victoire' }">
 		        				<th>Nombre de victoire</th>
@@ -71,13 +73,27 @@
 		        				<th>Ratio victoire/defaite</th>
 		        			</c:when>
 		        		</c:choose>
-		        	</tr>                   
+		        	</tr>
 				</thead>
 		
 		        <c:forEach items="${ mapClassement }" var="mapClassement" varStatus="boucle">
 		        	<tr>
-		            	<td><c:out value="${ mapClassement.key }"></c:out></td>
-		             	<td><c:out value="${ mapClassement.value }"></c:out></td>
+			        	<c:choose>
+			        		<c:when test="${ boucle.index + 1 eq 1 }">
+			        				<td><c:out value="${ boucle.index + 1 }"/>&nbsp;<i class="fas fa-trophy" style="color:#DCBD0E"></i></td>
+			        		</c:when>
+			        		<c:when test="${ boucle.index + 1 eq 2 }">
+			        				<td><c:out value="${ boucle.index + 1 }"/>&nbsp;<i class="fas fa-medal" style="color:#BCBCBB"></i></td>
+			        		</c:when>
+			        		<c:when test="${ boucle.index + 1 eq 3 }">
+			        				<td><c:out value="${ boucle.index + 1 }"/>&nbsp;<i class="fas fa-award" style="color:#8b4513"></i></td>
+			        		</c:when>
+			        		<c:otherwise>
+			        			<td><c:out value="${ boucle.index + 1 }"/></td>
+			        		</c:otherwise>
+			        	</c:choose>
+		            	<td><c:out value="${ mapClassement.key }"/></td>
+		             	<td><c:out value="${ mapClassement.value }"/></td>
 		    	   </tr>
 		        </c:forEach>
 		    </table>

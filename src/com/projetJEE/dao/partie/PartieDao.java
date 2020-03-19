@@ -10,5 +10,8 @@ public interface PartieDao {
 
 	void creer( Partie partie ) throws DAOException;
     List<Partie> lister() throws DAOException;
-    Map<String, Integer> classer(String periode, String triePar) throws DAOException;
+    Map<String, Float> classerParVictoire(String periode) throws DAOException;
+    Map<String, Float> classerParDefaite(String periode) throws DAOException;
+    Map<String, Float> classerParRatio(String periode) throws DAOException;
+
 }

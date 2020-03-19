@@ -27,16 +27,16 @@
             <c:otherwise>
 	            <table class="table table-striped">
 	            	<thead class="thead-dark">
-	                	<tr><th>Pseudo</th><th>Date inscription</th><th>Nombre de victoires</th><th>Ratio de victoire</th><th>Classement</th></tr>                   
+	                	<tr><th>Pseudo</th><th>Date inscription</th><th>Date de naissance</th><th>Ville</th><th>Code Postal</th></tr>                   
 					</thead>
 					
 	                <c:forEach items="${ sessionScope.listeUtilisateurs }" var="mapUtilisateurs" varStatus="boucle">
 		                <tr>
 		                    <td><c:out value="${ mapUtilisateurs.value.pseudo }"></c:out></td>
 		                    <td><c:out value="${ mapUtilisateurs.value.dateInscription }"></c:out></td>
-		                    <td></td>
-		                    <td></td>
-		                    <td></td>
+		                    <td><c:out value="${ mapUtilisateurs.value.dateNaissance }"></c:out></td>
+		                    <td><c:out value="${ mapUtilisateurs.value.ville }"></c:out></td>
+		                    <td><c:out value="${ mapUtilisateurs.value.codePostal }"></c:out></td>
 		                </tr>
 	                </c:forEach>
 	            </table>
