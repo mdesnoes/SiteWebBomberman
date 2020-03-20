@@ -16,9 +16,6 @@ public class Deconnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	public static final String ACCUEIL= "/SiteWebBomberman/accueil";
-
-    private static final String ATT_TRIE_PAR = "triePar";
-    private static final String ATT_PERIODE = "periode";
     
     public Deconnexion() {
         super();
@@ -27,13 +24,10 @@ public class Deconnexion extends HttpServlet {
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
-        String periode = (String) session.getAttribute( ATT_PERIODE );
-		String triePar = (String) session.getAttribute( ATT_TRIE_PAR );
-		
+
         session.invalidate();
         
-        response.sendRedirect( ACCUEIL + "?periode=" + periode + "&triePar=" + triePar );
+        response.sendRedirect( ACCUEIL );
     }
 
 }

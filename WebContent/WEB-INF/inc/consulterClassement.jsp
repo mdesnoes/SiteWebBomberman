@@ -54,7 +54,7 @@
 	
 	<c:choose>
         <c:when test="${ empty sessionScope.mapClassement }">
-        	<p class="erreur">Aucune partie enregistrée</p>
+        	<p class="erreur" style="text-align:center;">Pas de classement</p>
     	</c:when>
     	<c:otherwise>
 			<table class="table table-striped">

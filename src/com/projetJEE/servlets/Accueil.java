@@ -98,16 +98,14 @@ public class Accueil extends HttpServlet {
         HttpSession session = request.getSession();
         gestionHistorique(session);
         
-        String periode = (String) request.getParameter( ATT_PERIODE );
-        String triePar = (String) request.getParameter( ATT_TRIE_PAR );
-        gestionClassement(session, periode, triePar);
+        gestionClassement(session, request);
  
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		Verification de la connexion
+		// Verification de la connexion
 		ConnexionForm form = new ConnexionForm(this.utilisateurDao);
         Utilisateur utilisateur = form.connecterUtilisateur( request );
 
@@ -123,7 +121,7 @@ public class Accueil extends HttpServlet {
         }
         
         
-//        Gestion du cookie du temps de connexion
+        // Gestion du cookie du temps de connexion
         if ( request.getParameter( CHAMP_MEMOIRE ) != null ) {
             DateTime dt = new DateTime();
             DateTimeFormatter formatter = DateTimeFormat.forPattern(PATTERN_DATE_TIME);
@@ -142,18 +140,30 @@ public class Accueil extends HttpServlet {
 	private void gestionHistorique(HttpSession session) {
         List<Partie> listeParties = this.partieDao.lister();
         Map<Long, Partie> mapParties = new HashMap<Long, Partie>();
+        
         for ( Partie partie : listeParties ) {
         	mapParties.put( partie.getId(), partie );
         }
+        
         session.setAttribute( ATT_LISTE_PARTIES, mapParties );
 	}
 	
-	private void gestionClassement(HttpSession session, String periode, String triePar) {
+	private void gestionClassement(HttpSession session, HttpServletRequest request) {
         Map<String, Float> mapClassement = null;
         
+        String periode = (String) request.getParameter( ATT_PERIODE );
+        String triePar = (String) request.getParameter( ATT_TRIE_PAR );
+        
+        // S'il n'y a pas de parametres passés dans l'URL, on regarde dans la session 
         if(periode == null && triePar == null) {
-        	periode = JOURNALIER;
-        	triePar = VICTOIRE;
+        	periode = (String) session.getAttribute( ATT_PERIODE );
+        	triePar = (String) session.getAttribute( ATT_TRIE_PAR );
+        	
+        	// Si la valeur de periode et triePar n'est pas enregistré en session, on leurs donne une valeur par défaut
+        	if(periode == null && triePar == null) {
+            	periode = JOURNALIER;
+            	triePar = VICTOIRE;
+            }
         }
         
         switch(triePar) {
@@ -161,6 +171,7 @@ public class Accueil extends HttpServlet {
 		    case DEFAITE: mapClassement = this.partieDao.classerParDefaite(periode); break;
 		    case RATIO: mapClassement = this.partieDao.classerParRatio(periode); break;
         }
+        
         session.setAttribute( ATT_MAP_CLASSEMENT, mapClassement );
         session.setAttribute( ATT_TRIE_PAR, triePar );
         session.setAttribute( ATT_PERIODE, periode);
