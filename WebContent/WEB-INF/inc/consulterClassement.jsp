@@ -1,49 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-	<link rel="stylesheet" href="css/myStyle.css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
 <body>
 
 	<nav>
 		<div class="nav nav-tabs" id="nav-tab" role="tablist">
-	    	<a class="nav-item nav-link active" id="nav-journalier-tab" data-toggle="tab" 
-	    		href="#nav-journalier" role="tab" aria-controls="nav-journalier" aria-selected="true">Journalier</a>
-	    	<a class="nav-item nav-link" id="nav-mensuel-tab" data-toggle="tab" 
-	    		href="#nav-mensuel" role="tab" aria-controls="nav-mensuel" aria-selected="false">Mensuel</a>
-	    	<a class="nav-item nav-link" id="nav-annuel-tab" data-toggle="tab" 
-	    		href="#nav-annuel" role="tab" aria-controls="nav-annuel" aria-selected="false">Annuel</a>
+	    	<a class="${ sessionScope.periode eq 'journalier' ? 'nav-item nav-link active' : 'nav-item nav-link' }"
+	    		id="nav-journalier-tab" data-toggle="tab" 
+	    		href="#nav-journalier" role="tab" aria-controls="nav-journalier">Journalier</a>
+	    	<a class="${ sessionScope.periode eq 'mensuel' ? 'nav-item nav-link active' : 'nav-item nav-link' }"
+	    		id="nav-mensuel-tab" data-toggle="tab" 
+	    		href="#nav-mensuel" role="tab" aria-controls="nav-mensuel">Mensuel</a>
+	    	<a class="${ sessionScope.periode eq 'annuel' ? 'nav-item nav-link active' : 'nav-item nav-link' }"
+	    		id="nav-annuel-tab" data-toggle="tab" 
+	    		href="#nav-annuel" role="tab" aria-controls="nav-annuel">Annuel</a>
 		</div>
 	</nav>
 	
 	
 	<div class="tab-content" id="nav-tabContent">
-	  	<div class="tab-pane fade show active" id="nav-journalier" role="tabpanel" aria-labelledby="nav-journalier-tab">
+	  	<div class="tab-pane fade" id="nav-journalier" role="tabpanel" aria-labelledby="nav-journalier-tab">
 	  		<div class="container">
-	  			<div class="row">
+	  			<div class="row" style="text-align:center;">
 	  				<div class="col-md-3"><a href="<c:url value="/accueil?periode=journalier&triePar=victoire"/>">Par victoire</a></div>
 	  				<div class="col-md-3"><a href="<c:url value="/accueil?periode=journalier&triePar=defaite"/>">Par defaite</a></div>
 	  				<div class="col-md-6"><a href="<c:url value="/accueil?periode=journalier&triePar=ratio"/>">Par ratio victoire/defaite</a></div>
-	  			</div>	
+	  			</div>
 	  		</div>
 	  	</div>
 	  	<div class="tab-pane fade" id="nav-mensuel" role="tabpanel" aria-labelledby="nav-mensuel-tab">
 	  		<div class="container">
-	  			<div class="row">
+	  			<div class="row" style="text-align:center;">
 	  				<div class="col-md-3"><a href="<c:url value="/accueil?periode=mensuel&triePar=victoire"/>">Par victoire</a></div>
 					<div class="col-md-3"><a href="<c:url value="/accueil?periode=mensuel&triePar=defaite"/>">Par defaite</a></div>
 					<div class="col-md-5"><a href="<c:url value="/accueil?periode=mensuel&triePar=ratio"/>">Par ratio victoire/defaite</a></div>
-	  			</div>	
+	  			</div>
 	  		</div>
 	  	</div>
 	  	<div class="tab-pane fade" id="nav-annuel" role="tabpanel" aria-labelledby="nav-annuel-tab">
 	  		<div class="container">
-	  			<div class="row">
+	  			<div class="row" style="text-align:center;">
 	  				<div class="col-md-3"><a href="<c:url value="/accueil?periode=annuel&triePar=victoire"/>">Par victoire</a></div>
 					<div class="col-md-3"><a href="<c:url value="/accueil?periode=annuel&triePar=defaite"/>">Par defaite</a></div>
 					<div class="col-md-5"><a href="<c:url value="/accueil?periode=annuel&triePar=ratio"/>">Par ratio victoire/defaite</a></div>
@@ -93,10 +96,7 @@
 			        		</c:otherwise>
 			        	</c:choose>
 		            	<td><c:out value="${ mapClassement.key }"/></td>
-		             	<td>
-		             		<c:out value="${ mapClassement.value }"/>
-		             		<c:if test="${ sessionScope.triePar eq 'ratio' }">%</c:if>
-		             	</td>
+		             	<td><fmt:formatNumber type="${ sessionScope.triePar eq 'ratio' ? 'percent' : 'number' }" value="${ mapClassement.value }"/></td>
 		    	   </tr>
 		        </c:forEach>
 		    </table>

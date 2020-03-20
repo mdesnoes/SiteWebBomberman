@@ -1,7 +1,7 @@
 package com.projetJEE.servlets;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -139,7 +139,7 @@ public class Accueil extends HttpServlet {
 	
 	private void gestionHistorique(HttpSession session) {
         List<Partie> listeParties = this.partieDao.lister();
-        Map<Long, Partie> mapParties = new HashMap<Long, Partie>();
+        Map<Long, Partie> mapParties = new LinkedHashMap<Long, Partie>();
         
         for ( Partie partie : listeParties ) {
         	mapParties.put( partie.getId(), partie );
@@ -165,6 +165,7 @@ public class Accueil extends HttpServlet {
             	triePar = VICTOIRE;
             }
         }
+        logger.info("Filtre classement : periode = " + periode + " - triePar = " + triePar);
         
         switch(triePar) {
 		    case VICTOIRE: mapClassement = this.partieDao.classerParVictoire(periode); break;

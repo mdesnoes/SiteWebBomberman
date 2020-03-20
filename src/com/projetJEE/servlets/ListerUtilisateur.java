@@ -1,7 +1,7 @@
 package com.projetJEE.servlets;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +41,7 @@ public class ListerUtilisateur extends HttpServlet {
         HttpSession session = request.getSession();
 
         List<Utilisateur> listeUtilisateurs = this.utilisateurDao.lister();
-        Map<Long, Utilisateur> mapUtilisateurs = new HashMap<Long, Utilisateur>();
+        Map<Long, Utilisateur> mapUtilisateurs = new LinkedHashMap<Long, Utilisateur>();
         for ( Utilisateur utilisateur : listeUtilisateurs ) {
         	mapUtilisateurs.put( utilisateur.getId(), utilisateur );
         }

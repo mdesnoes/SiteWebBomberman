@@ -8,7 +8,7 @@
 	<title>Accueil Site Bomberman</title>
 
     <!-- CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/myStyle.css">
 	<link rel="stylesheet" href="icons/all.css">
 	
@@ -55,7 +55,6 @@
 				  		<button type="submit" class="btn btn-primary" id="btnMonCompte">Mon compte&nbsp;<i class="fas fa-user-cog"></i></button>
 					</a>
 					
-<!-- 					Bouton de deconnexion -->
 					<form method="post" action="<c:url value="/deconnexion" />">
 						<button type="submit" class="btn btn-primary" id="btnDeconnexion" disabled="disabled" title="Vous devez être connecté !">Deconnexion&nbsp;<i class="fas fa-user-times"></i></button>
 					</form>

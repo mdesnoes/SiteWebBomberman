@@ -33,7 +33,7 @@ public class PartieDaoImpl implements PartieDao {
 	private static final String ANNUEL = "annuel";
 	
 	private static final String SQL_INSERT = "INSERT INTO Partie (date_debut, date_fin, vainqueur) VALUES (?, ?, ?)";
-    private static final String SQL_SELECT_ALL_PARTIE = "SELECT * FROM Partie ORDER BY id";
+    private static final String SQL_SELECT_ALL_PARTIE = "SELECT * FROM Partie ORDER BY id DESC";
     private static final String SQL_CLASSER_PAR_VICTOIRE_JOURNALIER = "SELECT ANY_VALUE(vainqueur), COUNT(vainqueur) as count FROM Partie WHERE DAY(date_debut) = ? GROUP BY vainqueur ORDER BY count DESC";
     private static final String SQL_CLASSER_PAR_VICTOIRE_MENSUEL = "SELECT ANY_VALUE(vainqueur), COUNT(vainqueur) as count FROM Partie WHERE MONTH(date_debut) = ? GROUP BY vainqueur ORDER BY count DESC";
     private static final String SQL_CLASSER_PAR_VICTOIRE_ANNUEL = "SELECT ANY_VALUE(vainqueur), COUNT(vainqueur) as count FROM Partie WHERE YEAR(date_debut) = ? GROUP BY vainqueur ORDER BY count DESC";
@@ -181,7 +181,7 @@ public class PartieDaoImpl implements PartieDao {
 			float nbVictoire = entry.getValue();
 			float nbDefaite = mapClassementDefaite.get(joueur);
 			
-			mapClassement.put(joueur, (nbVictoire / nbDefaite) * 100);
+			mapClassement.put(joueur, (nbVictoire / nbDefaite));
 		}
 		
 		return mapClassement;
