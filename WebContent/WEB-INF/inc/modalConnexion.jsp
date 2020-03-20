@@ -18,7 +18,7 @@
           				<span aria-hidden="true">&times;</span>
         			</button>
       		</div>
-      		<form method="post" action="accueil?periode=${ periode }&triePar=${ triePar }">
+      		<form method="post" action="accueil">
 	      		<div class="modal-body">
 	      				<span class="erreur">${form.erreurs['donnee_incorrecte']}</span>
 		        		<div class="form-group">
