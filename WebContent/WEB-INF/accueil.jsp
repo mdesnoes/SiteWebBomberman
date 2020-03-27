@@ -108,7 +108,7 @@
 							<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
 						</a>
 					</div>
-					
+										
 					<c:choose>
 						<c:when test="${!empty sessionUtilisateur }">
 							<c:import url="inc/consulterHistorique.jsp" />

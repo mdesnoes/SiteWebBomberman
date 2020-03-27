@@ -27,6 +27,7 @@ import com.projetJEE.dao.DAOFactory;
 import com.projetJEE.dao.partie.PartieDao;
 import com.projetJEE.dao.utilisateur.UtilisateurDao;
 import com.projetJEE.metier.ConnexionForm;
+import com.projetJEE.metier.RechercheHistoriquePartie;
 
 /**
  * Servlet implementation class Accueil
@@ -96,49 +97,61 @@ public class Accueil extends HttpServlet {
 
         
         HttpSession session = request.getSession();
-        gestionHistorique(session);
         
-        gestionClassement(session, request);
+        if(session.getAttribute( ATT_LISTE_PARTIES ) == null) {
+        	List<Partie> listeParties = this.partieDao.lister();
+        	enregistrementPartieSession(listeParties, session);
+        }
+        
+        enregistrementClassementSession(session, request);
  
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Verification de la connexion
-		ConnexionForm form = new ConnexionForm(this.utilisateurDao);
-        Utilisateur utilisateur = form.connecterUtilisateur( request );
-
         HttpSession session = request.getSession();
-        if ( form.getErreurs().isEmpty() ) {
-            session.setAttribute( ATT_SESSION_USER, utilisateur );
-            
-			logger.info("Connexion réussie !");
-        } else {
-            session.setAttribute( ATT_SESSION_USER, null );
-            
-            logger.info("Connexion echouée !");
-        }
-        
-        
-        // Gestion du cookie du temps de connexion
-        if ( request.getParameter( CHAMP_MEMOIRE ) != null ) {
-            DateTime dt = new DateTime();
-            DateTimeFormatter formatter = DateTimeFormat.forPattern(PATTERN_DATE_TIME);
-            String dateDerniereConnexion = dt.toString( formatter );
-            setCookie( response, COOKIE_DERNIERE_CONNEXION, dateDerniereConnexion, COOKIE_MAX_AGE );
-        } else {
-            setCookie( response, COOKIE_DERNIERE_CONNEXION, "", 0 );
-        }
 
-        request.setAttribute( ATT_FORM, form );
-        request.setAttribute( ATT_USER, utilisateur );
+        if(session.getAttribute(ATT_SESSION_USER) == null) {
+			// Verification de la connexion
+			ConnexionForm form = new ConnexionForm(this.utilisateurDao);
+	        Utilisateur utilisateur = form.connecterUtilisateur(request);
+	
+	        if ( form.getErreurs().isEmpty() ) {
+	            session.setAttribute( ATT_SESSION_USER, utilisateur );
+	            
+				logger.info("Connexion réussie !");
+	        } else {
+	            session.setAttribute( ATT_SESSION_USER, null );
+	            
+	            logger.info("Connexion echouée !");
+	        }
+	        
+	        // Gestion du cookie du temps de connexion
+	        if ( request.getParameter( CHAMP_MEMOIRE ) != null ) {
+	            DateTime dt = new DateTime();
+	            DateTimeFormatter formatter = DateTimeFormat.forPattern(PATTERN_DATE_TIME);
+	            String dateDerniereConnexion = dt.toString( formatter );
+	            setCookie( response, COOKIE_DERNIERE_CONNEXION, dateDerniereConnexion, COOKIE_MAX_AGE );
+	        } else {
+	            setCookie( response, COOKIE_DERNIERE_CONNEXION, "", 0 );
+	        }
+
+	        request.setAttribute( ATT_FORM, form );
+	        request.setAttribute( ATT_USER, utilisateur );
+        }
+        
+        
+        // Recherche de l'historique des parties
+        RechercheHistoriquePartie rechercheHistoPartie = new RechercheHistoriquePartie(this.partieDao);
+        List<Partie> listePartie = rechercheHistoPartie.rechercherPartie(request);
+        enregistrementPartieSession(listePartie, session);
 
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 	
-	private void gestionHistorique(HttpSession session) {
-        List<Partie> listeParties = this.partieDao.lister();
+	
+	private void enregistrementPartieSession(List<Partie> listeParties, HttpSession session) {
         Map<Long, Partie> mapParties = new LinkedHashMap<Long, Partie>();
         
         for ( Partie partie : listeParties ) {
@@ -148,7 +161,8 @@ public class Accueil extends HttpServlet {
         session.setAttribute( ATT_LISTE_PARTIES, mapParties );
 	}
 	
-	private void gestionClassement(HttpSession session, HttpServletRequest request) {
+	
+	private void enregistrementClassementSession(HttpSession session, HttpServletRequest request) {
         Map<String, Float> mapClassement = null;
         
         String periode = (String) request.getParameter( ATT_PERIODE );

@@ -78,13 +78,13 @@ public class ConnexionForm {
         }
 
         // On retourne l'utilisateur trouvé en base de donnée ou un utilisateur avec le mauvais pseudo (pour l'affichage dans le modal de connexion)
-        Utilisateur utilisateurRetoure = new Utilisateur();
+        Utilisateur utilisateurRetourne = new Utilisateur();
         if(utilisateur != null) {
-        	utilisateurRetoure = utilisateur;
+        	utilisateurRetourne = utilisateur;
         } else {
-        	utilisateurRetoure.setPseudo(pseudo);
+        	utilisateurRetourne.setPseudo(pseudo);
         }
-        return utilisateurRetoure;
+        return utilisateurRetourne;
     }
     
 

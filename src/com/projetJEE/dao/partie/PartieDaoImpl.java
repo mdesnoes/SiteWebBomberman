@@ -15,6 +15,7 @@ import java.util.Map;
 import org.joda.time.DateTime;
 
 import com.projetJEE.beans.Partie;
+import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOException;
 import com.projetJEE.dao.DAOFactory;
 
@@ -56,6 +57,8 @@ public class PartieDaoImpl implements PartieDao {
 		this.year = Integer.toString(date.getYear());
     }
 	
+	
+	
 	@Override
 	public void creer(Partie partie) throws DAOException {
 		Connection connexion = null;
@@ -85,6 +88,8 @@ public class PartieDaoImpl implements PartieDao {
 		
 	}
 	
+	
+	
 	@Override
     public List<Partie> lister() throws DAOException {
 		Connection connexion = null;
@@ -107,6 +112,32 @@ public class PartieDaoImpl implements PartieDao {
 
         return parties;
     }
+	
+	
+	
+	@Override
+	public List<Partie> rechercher( String sql, Object... objets ) throws DAOException {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Partie> parties = new ArrayList<Partie>();
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets );
+            resultSet = preparedStatement.executeQuery();
+            while( resultSet.next() ) {
+            	parties.add( map( resultSet ) );
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }
+
+        return parties;
+    }
+	
 	
 
 	@Override
@@ -136,6 +167,7 @@ public class PartieDaoImpl implements PartieDao {
 		return mapClassement;
 	}
 
+	
 	@Override
 	public Map<String, Float> classerParDefaite(String periode) throws DAOException {
 		Connection connexion = null;
@@ -169,6 +201,7 @@ public class PartieDaoImpl implements PartieDao {
 		return mapClassement;
 	}
 
+	
 	@Override
 	public Map<String, Float> classerParRatio(String periode) throws DAOException {
 		Map<String, Float> mapClassementVictoire = this.classerParVictoire(periode);
