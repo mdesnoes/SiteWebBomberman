@@ -2,17 +2,18 @@ package com.projetJEE.metier;
 import org.jasypt.util.text.BasicTextEncryptor;
 
 
-// C'est un singleton
+/* singleton */
 public class MotDePasseEncryptor {
 	
 	private static MotDePasseEncryptor uniqueInstance = null;
+	private static final String KEY = "keyMDPEncryptor";
 	
     private BasicTextEncryptor textEncryptor;
 
     
     private MotDePasseEncryptor() {
     	this.textEncryptor = new BasicTextEncryptor();
-        this.textEncryptor.setPassword("keyMDPEncryptor"); // Clé secrete
+        this.textEncryptor.setPassword(KEY); // Clé secrete
 
     }
     

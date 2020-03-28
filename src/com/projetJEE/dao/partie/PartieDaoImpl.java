@@ -15,7 +15,6 @@ import java.util.Map;
 import org.joda.time.DateTime;
 
 import com.projetJEE.beans.Partie;
-import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOException;
 import com.projetJEE.dao.DAOFactory;
 

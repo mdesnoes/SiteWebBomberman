@@ -1,8 +1,11 @@
 package com.projetJEE.beans;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Partie {
+public class Partie implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	private long id;
 	private Timestamp dateDebut;

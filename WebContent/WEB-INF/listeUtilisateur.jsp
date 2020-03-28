@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Liste des Joueurs</title>
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/myStyle.css">
@@ -35,8 +35,18 @@
 		                    <td><c:out value="${ mapUtilisateurs.value.pseudo }"></c:out></td>
 		                    <td><c:out value="${ mapUtilisateurs.value.dateInscription }"></c:out></td>
 		                    <td><c:out value="${ mapUtilisateurs.value.dateNaissance }"></c:out></td>
-		                    <td><c:out value="${ mapUtilisateurs.value.ville }"></c:out></td>
-		                    <td><c:out value="${ mapUtilisateurs.value.codePostal }"></c:out></td>
+		                    <td>
+		                    	<c:choose>
+		                    		<c:when test="${ !empty mapUtilisateurs.value.ville }"><c:out value="${ mapUtilisateurs.value.ville }"></c:out></c:when>
+		                    		<c:otherwise>Non renseigné</c:otherwise>
+		                    	</c:choose>
+		                    </td>
+		                    <td>
+		                    	<c:choose>
+		                    		<c:when test="${ !empty mapUtilisateurs.value.codePostal }"><c:out value="${ mapUtilisateurs.value.codePostal }"></c:out></c:when>
+		                    		<c:otherwise>Non renseigné</c:otherwise>
+		                    	</c:choose>
+		                    </td>
 		                </tr>
 	                </c:forEach>
 	            </table>

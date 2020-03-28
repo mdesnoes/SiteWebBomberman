@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.projetJEE.beans.Partie;
-import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOException;
 
 public interface PartieDao {

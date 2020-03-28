@@ -26,6 +26,7 @@ import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOFactory;
 import com.projetJEE.dao.partie.PartieDao;
 import com.projetJEE.dao.utilisateur.UtilisateurDao;
+import com.projetJEE.metier.ClassementUtilisateur;
 import com.projetJEE.metier.ConnexionForm;
 import com.projetJEE.metier.RechercheHistoriquePartie;
 
@@ -49,12 +50,10 @@ public class Accueil extends HttpServlet {
     private static final String ATT_MAP_CLASSEMENT = "mapClassement";
     private static final String ATT_TRIE_PAR = "triePar";
     private static final String ATT_PERIODE = "periode";
-
-    private static final String VICTOIRE = "victoire";
-    private static final String DEFAITE = "defaite";
-    private static final String RATIO = "ratio";
-    private static final String JOURNALIER = "journalier";
-
+    
+    private static final String PERIODE_DEFAUT = "journalier";
+    private static final String TRIEPAR_DEFAUT = "victoire";
+    
     private static final String COOKIE_DERNIERE_CONNEXION = "derniereConnexion";
     private static final String  CHAMP_MEMOIRE = "memoire";
     private static final int COOKIE_MAX_AGE = 60 * 60 * 24 * 365;  // 1 an
@@ -97,17 +96,21 @@ public class Accueil extends HttpServlet {
 
         
         HttpSession session = request.getSession();
-        
+        // Historique des parties
         if(session.getAttribute( ATT_LISTE_PARTIES ) == null) {
         	List<Partie> listeParties = this.partieDao.lister();
         	enregistrementPartieSession(listeParties, session);
         }
         
+        // Classement
         enregistrementClassementSession(session, request);
  
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
 
+	
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
         HttpSession session = request.getSession();
@@ -142,13 +145,15 @@ public class Accueil extends HttpServlet {
         }
         
         
-        // Recherche de l'historique des parties
+        // Recherche dans l'historique des parties
         RechercheHistoriquePartie rechercheHistoPartie = new RechercheHistoriquePartie(this.partieDao);
         List<Partie> listePartie = rechercheHistoPartie.rechercherPartie(request);
         enregistrementPartieSession(listePartie, session);
 
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
 	}
+	
+	
 	
 	
 	private void enregistrementPartieSession(List<Partie> listeParties, HttpSession session) {
@@ -162,35 +167,34 @@ public class Accueil extends HttpServlet {
 	}
 	
 	
+	
+	
 	private void enregistrementClassementSession(HttpSession session, HttpServletRequest request) {
-        Map<String, Float> mapClassement = null;
-        
+		ClassementUtilisateur classement = new ClassementUtilisateur(this.partieDao);
+		
         String periode = (String) request.getParameter( ATT_PERIODE );
         String triePar = (String) request.getParameter( ATT_TRIE_PAR );
         
-        // S'il n'y a pas de parametres passés dans l'URL, on regarde dans la session 
+        /* Si periode et triePar ne sont pas passé en paramètre de l'URL, on regarde en session */
         if(periode == null && triePar == null) {
         	periode = (String) session.getAttribute( ATT_PERIODE );
         	triePar = (String) session.getAttribute( ATT_TRIE_PAR );
         	
-        	// Si la valeur de periode et triePar n'est pas enregistré en session, on leurs donne une valeur par défaut
+        	/* Sinon valeur par défaut */
         	if(periode == null && triePar == null) {
-            	periode = JOURNALIER;
-            	triePar = VICTOIRE;
+            	periode = PERIODE_DEFAUT;
+            	triePar = TRIEPAR_DEFAUT;
             }
         }
-        logger.info("Filtre classement : periode = " + periode + " - triePar = " + triePar);
         
-        switch(triePar) {
-		    case VICTOIRE: mapClassement = this.partieDao.classerParVictoire(periode); break;
-		    case DEFAITE: mapClassement = this.partieDao.classerParDefaite(periode); break;
-		    case RATIO: mapClassement = this.partieDao.classerParRatio(periode); break;
-        }
+        Map<String, Float> mapClassement = classement.classerUtilisateur(periode, triePar);
         
         session.setAttribute( ATT_MAP_CLASSEMENT, mapClassement );
         session.setAttribute( ATT_TRIE_PAR, triePar );
         session.setAttribute( ATT_PERIODE, periode);
 	}
+	
+	
 	
 	
 	private static void setCookie( HttpServletResponse response, String nom, String valeur, int maxAge ) {
