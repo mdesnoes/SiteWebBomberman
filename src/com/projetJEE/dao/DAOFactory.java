@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.TimeZone;
 
 import com.projetJEE.dao.partie.PartieDao;
 import com.projetJEE.dao.partie.PartieDaoImpl;
@@ -49,7 +50,7 @@ public class DAOFactory {
 
         try {
             properties.load( fichierProperties );
-            url = properties.getProperty( PROPERTY_URL );
+            url = properties.getProperty( PROPERTY_URL ) + "?serverTimezone=" + TimeZone.getDefault().getID();
             driver = properties.getProperty( PROPERTY_DRIVER );
             nomUtilisateur = properties.getProperty( PROPERTY_NOM_UTILISATEUR );
             motDePasse = properties.getProperty( PROPERTY_MOT_DE_PASSE );
