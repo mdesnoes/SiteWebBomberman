@@ -16,6 +16,9 @@
 			</div>
 			
 			<div class="col-xs-12 col-sm-12 col-md-2">
+				<a href="<c:url value="/boutique" />">
+				  	<button type="button" class="btn btn-primary btn-sm">Boutique&nbsp;<i class="fas fa-users"></i></button>
+				</a>
 				<a href="<c:url value="/listerUtilisateur" />">
 				  	<button type="button" class="btn btn-primary btn-sm">Liste des joueurs&nbsp;<i class="fas fa-users"></i></button>
 				</a>
