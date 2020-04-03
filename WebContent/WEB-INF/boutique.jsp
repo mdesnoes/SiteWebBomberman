@@ -20,6 +20,25 @@
 		<br />
 		<h2>Boutique</h2>
 		<br />
+		<c:choose>
+            <c:when test="${ empty sessionScope.listeObjets }">
+                <p class="erreur">Aucun objet dans la boutique</p>
+            </c:when>
+            <c:otherwise>
+	            <table class="table table-striped">
+	            	<thead class="thead-dark">
+	                	<tr><th>Objet</th><th>Prix</th></tr>                   
+					</thead>
+					
+	                <c:forEach items="${ sessionScope.listeObjets }" var="mapUtilisateurs" varStatus="boucle">
+		                <tr>
+		                    <td><c:out value="${ mapUtilisateurs.value.objet }"></c:out></td>
+		                    <td><c:out value="${ mapUtilisateurs.value.prix }"></c:out></td>
+		                </tr>
+	                </c:forEach>
+	            </table>
+            </c:otherwise>
+        </c:choose>
 	</div>
 	
 

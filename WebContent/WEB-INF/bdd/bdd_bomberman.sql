@@ -44,3 +44,14 @@ CREATE TABLE bdd_bomberman.Partie (
 	PRIMARY KEY ( id )
 ) ENGINE = INNODB;
 
+-- DROP TABLE bdd_bomberman.Boutique CASCADE;
+
+CREATE TABLE bdd_bomberman.Boutique (
+    id INT( 11 ) NOT NULL AUTO_INCREMENT,
+    objet VARCHAR( 20 ) NOT NULL,
+    prix VARCHAR( 5 ) NOT NULL,
+    PRIMARY KEY( id ),
+    UNIQUE( objet )
+) ENGINE = INNODB;
+
+

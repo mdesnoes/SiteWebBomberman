@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.TimeZone;
 
+import com.projetJEE.dao.boutique.BoutiqueDao;
+import com.projetJEE.dao.boutique.BoutiqueDaoImpl;
 import com.projetJEE.dao.partie.PartieDao;
 import com.projetJEE.dao.partie.PartieDaoImpl;
 import com.projetJEE.dao.utilisateur.UtilisateurDao;
@@ -80,5 +82,9 @@ public class DAOFactory {
     
     public PartieDao getPartieDao() {
         return new PartieDaoImpl( this );
+    }
+    
+    public BoutiqueDao getBoutiqueDao() {
+        return new BoutiqueDaoImpl( this );
     }
 }
