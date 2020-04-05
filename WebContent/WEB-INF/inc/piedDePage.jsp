@@ -11,8 +11,14 @@
 
 	<div class="container-fluid piedDePage">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-10">
+			<div class="col-xs-12 col-sm-12 col-md-8">
 				<span style="font-size: 13px;font-style: italic;"> Auteur : DESNOES Mathis, DAVIS Luca</span>
+			</div>
+			
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<a href="<c:url value="/boutique" />">
+				  	<button type="button" class="btn btn-primary btn-sm">Boutique du jeu&nbsp;<i class="fas fa-shopping-cart"></i></button>
+				</a>
 			</div>
 			
 			<div class="col-xs-12 col-sm-12 col-md-2">
