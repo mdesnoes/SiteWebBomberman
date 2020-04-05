@@ -81,7 +81,7 @@
 					<p>
 						<i class="fa fa-arrow-circle-right"></i>
 						&nbsp;&nbsp;
-						<a href="<c:url value="/Bomberman.zip" />" download>
+						<a href="<c:url value="/ClientBomberman.jar" />" download>
 							<button type="button" class="btn btn-warning btn-lg">Téléchargement du client <i class="fas fa-download"></i></button>
 						</a>
 						&nbsp;&nbsp;
