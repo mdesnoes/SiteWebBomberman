@@ -1,15 +1,10 @@
 
--- Creation de la base
-
+-- #### Creation de la base #### --
 -- CREATE DATABASE bdd_bomberman DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 
--- Creation de l'utilisateur de cette bdd
-
+-- #### Creation de l'utilisateur de cette bdd #### --
 -- CREATE USER 'admin_bdd_bomberman'@'localhost' IDENTIFIED BY 'MdPBddBmbrmAn';
 -- GRANT ALL ON bdd_bomberman.* TO 'admin_bdd_bomberman'@'localhost' IDENTIFIED BY 'MdPBddBmbrmAn';
-
--- Connexion à la base en local :
--- mysql -u root -h localhost -p
 
 -- #### TABLE #### --
 -- DROP TABLE bdd_bomberman.Utilisateur CASCADE;
@@ -57,12 +52,32 @@ CREATE TABLE bdd_bomberman.Boutique (
     UNIQUE( nom )
 ) ENGINE = INNODB;
 
-INSERT INTO Boutique (nom, type, prix, description, image)
-VALUES ('Bombe+', 'Bonus', '1000', 'Augmente la distance d'action de la bombe', 'img/Boutique/bombe.png');
 
+-- #### Les objets à vendre #### --
+-- BONUS --
+INSERT INTO Boutique (nom, type, prix, description, image)
+VALUES ('Bombe+', 'Bonus', '1000', 'Augmente la portée de la bombe', 'img/Boutique/bombe.png');
 
 INSERT INTO Boutique (nom, type, prix, description, image)
-VALUES ('Vitesse+', 'Bonus', '1000', 'Augmente la vitesse du joueur', 'img/Boutique/vitesse.png');
+VALUES ('Vitesse+', 'Bonus', '1500', 'Augmente la vitesse du joueur', 'img/Boutique/vitesse.png');
+
+-- SKIN --
+INSERT INTO Boutique (nom, type, prix, description, image)
+VALUES ('Skin Militaire', 'Skin', '2420', 'Nouveau skin de militaire pour les bombermans', 'img/Boutique/skin_militaire.png');
+
+INSERT INTO Boutique (nom, type, prix, description, image)
+VALUES ('Skin Monstre', 'Skin', '1850', 'Nouveau skin de monstre pour les bombermans', 'img/Boutique/skin_monstre.png');
+
+INSERT INTO Boutique (nom, type, prix, description, image)
+VALUES ('Skin Bombe', 'Skin', '820', 'Amélioration du skin pour les bombes', 'img/Boutique/skin_bombe.png');
+
+-- MAP --
+INSERT INTO Boutique (nom, type, prix, description, image)
+VALUES ('Map aquatique', 'Map', '5000', 'Nouvelle map qui se joue sur l eau !', 'img/Boutique/map_aquatique.png');
+
+INSERT INTO Boutique (nom, type, prix, description, image)
+VALUES ('Map géante', 'Map', '8500', 'Nouvelle map pour 30 joueurs !', 'img/Boutique/map_geante.png');
+
 
 
 
