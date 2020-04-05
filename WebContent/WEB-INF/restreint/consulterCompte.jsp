@@ -5,15 +5,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Consultation Compte Bomberman</title>
+	<title>Mon Compte</title>
 
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/myStyle.css">
 	<link rel="stylesheet" href="icons/all.css">
 	
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </head>
 <body style="background-image: url(img/plateau_bomberman.png); background-size: contain;">
 	
@@ -45,6 +46,7 @@
 	
 	<div class="container couleurGrisClair">
 		<c:import url="/WEB-INF/inc/formulaireModificationProfil.jsp" />
+		<br />
 	</div>
 	
 	
@@ -81,47 +83,6 @@
 	<div class="modal fade" id="modalModificationMotDePasse" tabindex="-1" role="dialog">
 		<c:import url="/WEB-INF/inc/modalModificationMotDePasse.jsp" />
 	</div>
-	
-	
-	<!-- JavaScript -->
-	<script>
-		$("#btnModif" ).click(function() {
-
-			if($("form #pseudo").val() != "") {
- 				$("#divModification").append("<p><i>Ancien pseudo :</i> <span style='color:#900'><c:out value='${ sessionScope.sessionUtilisateur.pseudo }'/> </span>" 
- 					+ " &nbsp;<i class='fas fa-arrows-alt-h'></i>&nbsp; <i>Nouveau pseudo :</i> <span style='color:#090'>" + $("form #pseudo").val() + "</span></p>");
-			}
-			
-			if($("form #nom").val() != "") {
- 				$("#divModification").append("<p><i>Ancien nom :</i> <span style='color:#900'><c:out value='${ sessionScope.sessionUtilisateur.nom }'/> </span>" 
- 					+ " &nbsp;<i class='fas fa-arrows-alt-h'></i>&nbsp; <i>Nouveau nom :</i> <span style='color:#090'>" + $("form #nom").val() + "</span></p>");
-			}
-			
-			if($("form #prenom").val() != "") {
- 				$("#divModification").append("<p><i>Ancien prenom :</i> <span style='color:#900'><c:out value='${ sessionScope.sessionUtilisateur.prenom }'/> </span>" 
- 					+ " &nbsp;<i class='fas fa-arrows-alt-h'></i>&nbsp; <i>Nouveau prenom :</i> <span style='color:#090'>" + $("form #prenom").val() + "</span></p>");
-			}
-			
-			if($("form #datenaissance").val() != "") {
- 				$("#divModification").append("<p><i>Ancienne date de naissance :</i> <span style='color:#900'><c:out value='${ sessionScope.sessionUtilisateur.dateNaissance }'/> </span>" 
- 					+ " &nbsp;<i class='fas fa-arrows-alt-h'></i>&nbsp; <i>Nouvelle date de naissance :</i> <span style='color:#090'>" + $("form #datenaissance").val() + "</span></p>");
-			}
-			
-			if($("form #email").val() != "") {
- 				$("#divModification").append("<p><i>Ancienne adresse e-mail :</i> <span style='color:#900'><c:out value='${ sessionScope.sessionUtilisateur.email }'/> </span>" 
- 					+ " &nbsp;<i class='fas fa-arrows-alt-h'></i>&nbsp; <i>Nouvelle adresse e-mail :</i> <span style='color:#090'>" + $("form #email").val() + "</span></p>");
-			}
-			
-			if($("form #adresse").val() != "" || $("form #cp").val() != "" || $("form #ville").val() != "") {
- 				$("#divModification").append("<p><i>Ancienne adresse :</i> <span style='color:#900'> "
- 					+ "<c:out value='${ sessionScope.sessionUtilisateur.adresse }'/> <c:out value='${ sessionScope.sessionUtilisateur.codePostal }'/> <c:out value='${ sessionScope.sessionUtilisateur.ville }'/> </span>" 
- 					+ " &nbsp;<i class='fas fa-arrows-alt-h'></i>&nbsp; <i>Nouveau pseudo :</i> <span style='color:#090'>"
- 					+ $("form #adresse").val() + " " + $("form #cp").val() + " " + $("form #ville").val() + "</span></p>");
-			}
-			
-		});			
-    </script>
-	
 	
 </body>
 </html>

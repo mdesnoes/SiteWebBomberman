@@ -6,7 +6,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-
 </head>
 <body>
 
@@ -20,6 +19,7 @@
       		</div>
       		<form method="post" action="accueil">
 	      		<div class="modal-body">
+	      				<span class="erreur">${form.erreurs['donnee_incorrecte']}</span>
 		        		<div class="form-group">
 	            			<label for="pseudo" class="col-form-label">Nom d'utilisateur :</label>
 	            			<input type="text" class="form-control" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.pseudo}"/>" />
@@ -29,6 +29,10 @@
 	            			<label for="password" class="col-form-label">Mot de passe :</label>
 	            			<input type="password" class="form-control" id="password" name="password" value="" size="20" maxlength="20"/>
 	            			<span class="erreur">${form.erreurs['password']}</span>
+	          			</div>
+	          			<div class="form-group">
+	          				<label for="memoire">Se souvenir de moi&nbsp;</label>
+                			<input type="checkbox" id="memoire" name="memoire" />
 	          			</div>
 	      		</div>
 	      		<div class="modal-footer">

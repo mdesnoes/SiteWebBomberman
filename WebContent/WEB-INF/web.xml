@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <display-name>SiteWebBomberman</display-name>
   
-  
+<!--   Filter qui gere l'encodage entre le front et le back -->
   <filter> 
 	    <filter-name>Set Character Encoding</filter-name>
 	    <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class> 
@@ -19,5 +19,22 @@
  	    <filter-name>Set Character Encoding</filter-name> 
  	    <url-pattern>/*</url-pattern> 
  	</filter-mapping>
+ 	
+ 	
+<!--  	Servlet pour gérer l'api rest -->
+	<servlet>
+        <servlet-name>Rest-serlvet</servlet-name>
+        <servlet-class> com.sun.jersey.spi.container.servlet.ServletContainer </servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Rest-serlvet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
   
 </web-app>

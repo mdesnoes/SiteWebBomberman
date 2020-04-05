@@ -1,16 +1,25 @@
 package com.projetJEE.beans;
 
-public class Utilisateur {
+import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
+
+
+public class Utilisateur implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
+	private long id;
 	private String pseudo;
 	private String password;
 	private String nom;
 	private String prenom;
 	private String email;
-	private String dateNaissance;
+	private Date dateNaissance;
 	private String adresse;
 	private String ville;
 	private String codePostal;
+	private Timestamp dateInscription;
 	
 	
 	public String getPseudo() {
@@ -37,10 +46,10 @@ public class Utilisateur {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public String getDateNaissance() {
+	public Date getDateNaissance() {
 		return dateNaissance;
 	}
-	public void setDateNaissance(String dateNaissance) {
+	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 	public String getEmail() {
@@ -67,6 +76,18 @@ public class Utilisateur {
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public Timestamp getDateInscription() {
+		return dateInscription;
+	}
+	public void setDateInscription(Timestamp dateInscription) {
+		this.dateInscription = dateInscription;
+	}
 	@Override
 	public String toString() {
 		return "Utilisateur [pseudo=" + pseudo + ", password=" + password + ", nom=" + nom + ", prenom=" + prenom
@@ -74,5 +95,4 @@ public class Utilisateur {
 				+ ", codePostal=" + codePostal + "]";
 	}
 
-	
 }

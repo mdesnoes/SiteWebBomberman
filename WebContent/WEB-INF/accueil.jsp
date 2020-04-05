@@ -8,8 +8,7 @@
 	<title>Accueil Site Bomberman</title>
 
     <!-- CSS -->
-    
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/myStyle.css">
 	<link rel="stylesheet" href="icons/all.css">
 	
@@ -23,40 +22,44 @@
 
 	<div class="container-fluid enTete">
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-xs-12 col-sm-12 col-md-1">
 				<img src="img/logoUA.png" id="imgLogo" alt="" />
 			</div>
-			<div class="col-md-6" style="text-align:right;">
-			
-				<!-- On verifie que l'utilisateur a un compte -->
+			<div class="col-xs-12 col-sm-12 col-md-3" style="margin-top:8px;font-size:20px;">
+				<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${ form.resultat }</p>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-3" style="text-align:right;">
 				<c:choose>
 					<c:when test="${!empty sessionScope.sessionUtilisateur }">
 						<p>Vous êtes connecté sous le pseudo <u><c:out value="${ sessionScope.sessionUtilisateur.pseudo }" /></u></p>
 					</c:when>
 					
 					<c:when test="${empty sessionScope.sessionUtilisateur }">
-						<p>Vous n'êtes pas connecté</p>
+						<p>Vous n'êtes pas connecté <br />
+							<c:if test="${!empty requestScope.intervalleConnexions}">
+	                			<i style="font-size:13px;">Dernière connexion, il y a ${requestScope.intervalleConnexions}</i>
+	                		</c:if>
+                		</p>
 					</c:when>
 				</c:choose>
 				
 			</div>
-			<div class="col-md-5">
+			<div class="col-xs-12 col-sm-12 col-md-5">
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConnexion">Se connecter&nbsp;<i class="fas fa-user"></i></button>
-				  	<a href="creationCompte">
+				  	<a href="<c:url value="/creationCompte" />">
 				  		<button type="button" class="btn btn-primary">Créer compte&nbsp;<i class="fas fa-user-plus"></i></button>
 				  	</a>
 				  	
-				  	<a href="consultationCompte">
+				  	<a href="<c:url value="/consultationCompte" />">
 				  		<button type="submit" class="btn btn-primary" id="btnMonCompte">Mon compte&nbsp;<i class="fas fa-user-cog"></i></button>
 					</a>
 					
-<!-- 					Bouton de deconnexion -->
 					<form method="post" action="<c:url value="/deconnexion" />">
 						<button type="submit" class="btn btn-primary" id="btnDeconnexion" disabled="disabled" title="Vous devez être connecté !">Deconnexion&nbsp;<i class="fas fa-user-times"></i></button>
 					</form>
 					<c:if test="${!empty sessionUtilisateur }">
-							<script> $("#btnDeconnexion").removeAttr("disabled"); </script>
+						<script> $("#btnDeconnexion").removeAttr("disabled"); </script>
 					</c:if>
 				</div>
 			</div>
@@ -71,15 +74,14 @@
 			<div class="col-xs-12 col-sm-12 col-md-6">
 			
 				<div class="div_telechargement">
-					<span style="font-size:60px"><b>Bienvenue !</b></span>
+					<span style="font-size:50px"><b>Bienvenue !</b></span>
 					<h3>Vous êtes sur le site du jeu Bomberman</h3>
 					
-					<br/>
 					<br/>
 					<p>
 						<i class="fa fa-arrow-circle-right"></i>
 						&nbsp;&nbsp;
-						<a href="Bomberman.zip" download>
+						<a href="<c:url value="/ClientBomberman.jar" />" download>
 							<button type="button" class="btn btn-warning btn-lg">Téléchargement du client <i class="fas fa-download"></i></button>
 						</a>
 						&nbsp;&nbsp;
@@ -94,26 +96,43 @@
 		</div>
 	</div>
 	
-	<div class="container-fluid" style="background-image: url(img/plateau_bomberman.png); background-size: contain;">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-1" ></div>
-			
-			<div class="col-xs-12 col-sm-12 col-md-5" id="historique">
-				<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
-				<p>Ici vous pouvez consultez l'historique</p>
-				<br />
+	<div style="background-image: url(img/plateau_bomberman.png); background-size: contain;">
+		<div class="container-fluid" style="width:1350px;">
+			<div class="row">
 				
-				<c:if test="${empty sessionUtilisateur }">
-					<p>Merci de vous connecter pour accéder à l'historique</p>
-				</c:if>
+				<div class="col-xs-12 col-sm-12 col-md-6" id="historique">
+					<h3 style="text-align:center">Historique <i class="fas fa-history"></i></h3>
+					<div>
+						Ici vous pouvez consultez l'historique des parties
+						<a href="<c:url value="/accueil"/>" style="float:right;">
+							<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
+						</a>
+					</div>
+										
+					<c:choose>
+						<c:when test="${!empty sessionUtilisateur }">
+							<c:import url="inc/consulterHistorique.jsp" />
+						</c:when>
+						
+						<c:otherwise>
+							<p>Merci de vous connecter pour accéder à l'historique</p>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				
+				<div class="col-xs-12 col-sm-12 col-md-6" id="classement">
+					<h3 style="text-align:center">Classement <i class="fas fa-poll"></i></h3>
+					<div>
+						Ici vous pouvez consultez le classement des joueurs
+						<a href="<c:url value="/accueil"/>" style="float:right;">
+							<button type="button" class="btn btn-link">Rafraichir&nbsp;<i class="fas fa-sync-alt"></i></button>
+						</a>
+					</div>
+					
+					<c:import url="inc/consulterClassement.jsp" />
+				</div>
+							
 			</div>
-			
-			<div class="col-xs-12 col-sm-12 col-md-5" id="classement">
-				<h3 style="text-align:center">Classement <i class="fas fa-poll"></i></h3>
-				<p>Ici vous pouvez consultez le classement des joueurs</p>
-			</div>
-			
-			<div class="col-xs-12 col-sm-12 col-md-1" ></div>
 		</div>
 	</div>
 	
@@ -121,7 +140,7 @@
 	
 	<!-- Modal -->
 	<div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog">
-			<c:import url="/WEB-INF/inc/modalConnexion.jsp" />
+		<c:import url="/WEB-INF/inc/modalConnexion.jsp" />
 	</div>
 	
 </body>

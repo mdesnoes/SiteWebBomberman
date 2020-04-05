@@ -16,7 +16,7 @@ public class Deconnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	public static final String ACCUEIL= "/SiteWebBomberman/accueil";
-
+    
     public Deconnexion() {
         super();
     }
@@ -24,6 +24,7 @@ public class Deconnexion extends HttpServlet {
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         HttpSession session = request.getSession();
+
         session.invalidate();
         
         response.sendRedirect( ACCUEIL );

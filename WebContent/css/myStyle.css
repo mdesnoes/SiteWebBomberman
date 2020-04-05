@@ -5,7 +5,7 @@
 }
 
 .bandeauAccueil {
-	height: 300px;
+	height: 250px;
  	background-color: #818385;
 }
 
@@ -20,6 +20,12 @@
 	background-color: #818385;
 }
 
+.bandeauListeUtilisateur {
+	background-color: #D2D5D7;
+	overflow:scroll;
+	height:682px;
+}
+
 .piedDePage {
 	 height: 30px;
 	 background-color: #CDCFD1;
@@ -31,13 +37,13 @@
 }
 
 #imgLogo {
-	height: 100%;
-	width: 50%;
+	height: 50px;
+	width: 50px;
 }
 
 #imageBomberman {
 	margin-top: 10px;
-	height: 280px;
+	height: 230px;
 	width: 280px;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -46,27 +52,22 @@
 #historique {
 	background-color: #D2D5D7;
 	overflow:scroll;
-	height:380px;
-	margin-right:20px;
+	height:430px;	
 }
 
 #classement {
 	background-color: #D2D5D7;
 	overflow:scroll;
-	height:380px;
-	margin-left:20px;
+	height:430px;
 }
 
 .formulaireCreationCompte {
 	background-color: #D2D5D7;
-	height:500px;
-	margin-top:32px;
 }
 
 .couleurGrisClair {
 	background-color: #D2D5D7;
 }
-
 
 .bandeauConsultationCompteInterdit {
 	background-color: #D2D5D7;
@@ -81,4 +82,12 @@
 
 .erreur {
 	color: #900;
+}
+
+h2 {
+	text-align:center;
+}
+
+th, td {
+	text-align:center;
 }
