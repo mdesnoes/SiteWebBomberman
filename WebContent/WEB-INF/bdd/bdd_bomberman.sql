@@ -48,10 +48,21 @@ CREATE TABLE bdd_bomberman.Partie (
 
 CREATE TABLE bdd_bomberman.Boutique (
     id INT( 11 ) NOT NULL AUTO_INCREMENT,
-    objet VARCHAR( 20 ) NOT NULL,
+    nom VARCHAR( 20 ) NOT NULL,
+    type VARCHAR ( 20 ) NOT NULL,
     prix VARCHAR( 5 ) NOT NULL,
+    description VARCHAR ( 200 ) NOT NULL,
+    image VARCHAR ( 50 ) NOT NULL,
     PRIMARY KEY( id ),
-    UNIQUE( objet )
+    UNIQUE( nom )
 ) ENGINE = INNODB;
+
+INSERT INTO Boutique (nom, type, prix, description, image)
+VALUES ('Bombe+', 'Bonus', '1000', 'Augmente la distance d'action de la bombe', 'img/Boutique/bombe.png');
+
+
+INSERT INTO Boutique (nom, type, prix, description, image)
+VALUES ('Vitesse+', 'Bonus', '1000', 'Augmente la vitesse du joueur', 'img/Boutique/vitesse.png');
+
 
 
