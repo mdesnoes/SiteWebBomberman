@@ -20,11 +20,16 @@ public class BoutiqueDaoImpl implements BoutiqueDao{
 	private DAOFactory daoFactory;
 	
 	private static final String CHAMP_ID = "id";
-	private static final String CHAMP_OBJET = "objet";
+	private static final String CHAMP_NOM = "nom";
+	private static final String CHAMP_TYPE = "type";
 	private static final String CHAMP_PRIX = "prix";
+	private static final String CHAMP_DESCRIPTION = "description";
+	private static final String CHAMP_IMAGE = "image";
 	
-	private static final String SQL_INSERT = "INSERT INTO Boutique (objet, prix)" + " VALUES (?, ?)";
-	private static final String SQL_UPDATE_PAR_ID = "UPDATE Boutique SET objet = ?, prix = ? WHERE id = ? ";
+	private static final String SQL_INSERT = "INSERT INTO Boutique (nom, type, prix, description, image)"
+			+ " VALUES (?, ?, ?, ?, ?)";
+	private static final String SQL_UPDATE_PAR_ID = "UPDATE Boutique SET nom = ?, type = ?, prix = ?, description = ?, image = ?"
+			+ " WHERE id = ? ";
 	private static final String SQL_DELETE_PAR_ID = "DELETE FROM Boutique WHERE id = ?";
 	private static final String SQL_SELECT_ALL_BOUTIQUE = "SELECT * FROM Boutique ORDER BY id";
 	
@@ -40,7 +45,8 @@ public class BoutiqueDaoImpl implements BoutiqueDao{
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, objet.getObjet(), objet.getPrix());
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, objet.getNom(),
+            		objet.getType(), objet.getPrix(), objet.getDescription(), objet.getImage());
             int statut = preparedStatement.executeUpdate();
             
             if ( statut == 0 ) {
@@ -113,7 +119,8 @@ public class BoutiqueDaoImpl implements BoutiqueDao{
         
 		try {
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_UPDATE_PAR_ID, true, objet.getObjet(), objet.getPrix(), objet.getId() );
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_UPDATE_PAR_ID, true, objet.getNom(),
+            		objet.getType(), objet.getPrix(), objet.getDescription(), objet.getImage(), objet.getId() );
             int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
                 throw new DAOException( "Échec de la modification de l'objet, aucune ligne modifiée dans la table." );
@@ -152,8 +159,11 @@ public class BoutiqueDaoImpl implements BoutiqueDao{
         Objet objet = new Objet();
         
         objet.setId( resultSet.getLong( CHAMP_ID ) );
-        objet.setObjet( resultSet.getString( CHAMP_OBJET ));
-        objet.setPrix( resultSet.getString( CHAMP_PRIX ));
+        objet.setNom( resultSet.getString( CHAMP_NOM ) );
+        objet.setType( resultSet.getString( CHAMP_TYPE ) );
+        objet.setPrix( resultSet.getString( CHAMP_PRIX ) );
+        objet.setDescription( resultSet.getString( CHAMP_DESCRIPTION ) );
+        objet.setImage( resultSet.getString( CHAMP_IMAGE ) );
         
         return objet;
     }

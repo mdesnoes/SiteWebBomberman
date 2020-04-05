@@ -27,13 +27,17 @@
             <c:otherwise>
 	            <table class="table table-striped">
 	            	<thead class="thead-dark">
-	                	<tr><th>Objet</th><th>Prix</th></tr>                   
+	                	<tr><th></th><th>Objet</th><th>Type</th><th>Prix</th><th>Description</th><th></th></tr>                   
 					</thead>
 					
 	                <c:forEach items="${ sessionScope.listeObjets }" var="mapUtilisateurs" varStatus="boucle">
 		                <tr>
-		                    <td><c:out value="${ mapUtilisateurs.value.objet }"></c:out></td>
+		                	<td><img src="<c:out value="${ mapUtilisateurs.value.image }"></c:out>" /></td>
+		                    <td><c:out value="${ mapUtilisateurs.value.nom }"></c:out></td>
+		                    <td><c:out value="${ mapUtilisateurs.value.type }"></c:out></td>
 		                    <td><c:out value="${ mapUtilisateurs.value.prix }"></c:out></td>
+		                    <td><c:out value="${ mapUtilisateurs.value.description }"></c:out></td>
+		                    <td><input type="submit" value="Acheter"></td>
 		                </tr>
 	                </c:forEach>
 	            </table>
