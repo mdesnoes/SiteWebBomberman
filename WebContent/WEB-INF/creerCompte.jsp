@@ -89,7 +89,7 @@
 			</div>
 			
 			<div class="form-group">
-			    <label for="datenaissance">Date de naissance&nbsp;<i class="fas fa-calendar-alt"></i> (facultative)</label>
+			    <label for="datenaissance">Date de naissance&nbsp;<i class="fas fa-calendar-alt"></i></label>
     			<input type="date" class="form-control" id="datenaissance" name="datenaissance" value="<c:out value="${ utilisateur.dateNaissance }" />">
     			<span class="erreur">${form.erreurs['datenaissance']}</span>
             </div>

@@ -44,7 +44,7 @@
     	<c:otherwise>
 			<table class="table table-striped">
 		    	<thead class="thead-dark">
-		        	<tr><th>Id de la partie</th><th>Date de debut</th><th>Date de fin</th><th>Vainqueur</th></tr>                   
+		        	<tr><th>Id de la partie</th><th>Date de debut</th><th>Date de fin</th><th>Vainqueur</th><th></th></tr>                   
 				</thead>
 		
 		        <c:forEach items="${ listeParties }" var="mapParties" varStatus="boucle">
@@ -53,6 +53,14 @@
 		             	<td><c:out value="${ mapParties.value.dateDebut }"></c:out></td>
 		             	<td><c:out value="${ mapParties.value.dateFin }"></c:out></td>
 		             	<td><c:out value="${ mapParties.value.vainqueur }"></c:out></td>
+		             	<td>
+		             		<a href="
+								<c:url value="/suppressionPartie">
+									<c:param name="idPartie" value="${ mapParties.value.id }" />
+								</c:url>">
+								 <img src="<c:url value="img/supprimer.png"/>" alt="Supprimer" />
+							</a>
+		             	</td>
 		    	   </tr>
 		        </c:forEach>
 		    </table>
