@@ -15,6 +15,7 @@ import java.util.Map;
 import org.joda.time.DateTime;
 
 import com.projetJEE.beans.Partie;
+import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOException;
 import com.projetJEE.dao.DAOFactory;
 
@@ -40,9 +41,10 @@ public class PartieDaoImpl implements PartieDao {
     private static final String SQL_NB_PARTIES_PAR_JOURS = "SELECT COUNT(*) FROM Partie WHERE DAY(date_debut) = ?";
     private static final String SQL_NB_PARTIES_PAR_MOIS = "SELECT COUNT(*) FROM Partie WHERE MONTH(date_debut) = ?";
     private static final String SQL_NB_PARTIES_PAR_ANS = "SELECT COUNT(*) FROM Partie WHERE YEAR(date_debut) = ?";
+    private static final String SQL_DELETE_PAR_ID = "DELETE FROM Partie WHERE id = ?";
 
     
-    // Jour, mois et année courante
+    /* Jour, mois et année courante */
     private String day;
     private String month;
     private String year;
@@ -136,6 +138,26 @@ public class PartieDaoImpl implements PartieDao {
 
         return parties;
     }
+	
+	
+	@Override
+	public void supprimerParId( String id ) throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_DELETE_PAR_ID, true, id );
+            int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de la suppression de la partie, aucune ligne supprimée dans la table." );
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( preparedStatement, connexion );
+        }
+	}
 	
 	
 

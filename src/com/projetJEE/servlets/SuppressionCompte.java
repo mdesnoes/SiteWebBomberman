@@ -11,11 +11,8 @@ import javax.servlet.http.HttpSession;
 import com.projetJEE.beans.Utilisateur;
 import com.projetJEE.dao.DAOFactory;
 import com.projetJEE.dao.utilisateur.UtilisateurDao;
-import com.projetJEE.metier.SupprimerCompteUtilisateur;
 
-/**
- * Servlet implementation class SuppressionCompte
- */
+
 @WebServlet("/suppressionCompte")
 public class SuppressionCompte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -38,12 +35,10 @@ public class SuppressionCompte extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 
-		//On supprime en base de donnée
-		SupprimerCompteUtilisateur form = new SupprimerCompteUtilisateur(this.utilisateurDao);
-		form.supprimerCompteUtilisateur( (Utilisateur) session.getAttribute( ATT_SESSION_USER ));
+		/* On supprime en base de donnée */
+    	this.utilisateurDao.supprimer((Utilisateur) session.getAttribute( ATT_SESSION_USER ));
 
 		session.invalidate();
-        
 		
         response.sendRedirect( ACCUEIL );
 	}
