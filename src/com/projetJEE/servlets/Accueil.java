@@ -96,13 +96,13 @@ public class Accueil extends HttpServlet {
 
         
         HttpSession session = request.getSession();
-        // Historique des parties
+        /* Historique des parties */
         if(session.getAttribute( ATT_LISTE_PARTIES ) == null) {
         	List<Partie> listeParties = this.partieDao.lister();
         	enregistrementPartieSession(listeParties, session);
         }
         
-        // Classement
+        /* Classement */
         enregistrementClassementSession(session, request);
  
 		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
@@ -145,7 +145,7 @@ public class Accueil extends HttpServlet {
         }
         
         
-        // Recherche dans l'historique des parties
+        /* Recherche dans l'historique des parties */
         RechercheHistoriquePartie rechercheHistoPartie = new RechercheHistoriquePartie(this.partieDao);
         List<Partie> listePartie = rechercheHistoPartie.rechercherPartie(request);
         enregistrementPartieSession(listePartie, session);

@@ -41,6 +41,7 @@ public class RechercheHistoriquePartie {
         	return this.partieDao.lister();
         }
 
+        /* Requete sql de recherche */
         String sql = "SELECT * FROM Partie ";
 
         if(id != null) {
