@@ -23,33 +23,68 @@
 	    		href="#nav-annuel" role="tab" aria-controls="nav-annuel">Annuel</a>
 		</div>
 	</nav>
-	
-	
+
 	<div class="tab-content" id="nav-tabContent">
 	  	<div class="tab-pane fade" id="nav-journalier" role="tabpanel" aria-labelledby="nav-journalier-tab">
 	  		<div class="container">
 	  			<div class="row" style="text-align:center;">
-	  				<div class="col-md-3"><a href="<c:url value="/accueil?periode=journalier&triePar=victoire"/>">Par victoire</a></div>
-	  				<div class="col-md-3"><a href="<c:url value="/accueil?periode=journalier&triePar=defaite"/>">Par defaite</a></div>
-	  				<div class="col-md-6"><a href="<c:url value="/accueil?periode=journalier&triePar=ratio"/>">Par ratio victoire/defaite</a></div>
+	  				<div class="col-md-3">
+	  					<a href="<c:url value="/accueil">
+	  								<c:param name="periode" value="journalier" />
+	  								<c:param name="triePar" value="victoire" />
+	  							 </c:url>">Par victoire</a></div>
+	  				<div class="col-md-3">
+	  					<a href="<c:url value="/accueil">
+	  								<c:param name="periode" value="journalier" />
+	  								<c:param name="triePar" value="defaite" />
+	  							 </c:url>">Par défaite</a></div>
+	  				<div class="col-md-6">
+	  					<a href="<c:url value="/accueil">
+	  								<c:param name="periode" value="journalier" />
+	  								<c:param name="triePar" value="ratio" />
+	  							 </c:url>">Par ratio victoire/defaite</a></div>
 	  			</div>
 	  		</div>
 	  	</div>
 	  	<div class="tab-pane fade" id="nav-mensuel" role="tabpanel" aria-labelledby="nav-mensuel-tab">
 	  		<div class="container">
 	  			<div class="row" style="text-align:center;">
-	  				<div class="col-md-3"><a href="<c:url value="/accueil?periode=mensuel&triePar=victoire"/>">Par victoire</a></div>
-					<div class="col-md-3"><a href="<c:url value="/accueil?periode=mensuel&triePar=defaite"/>">Par defaite</a></div>
-					<div class="col-md-5"><a href="<c:url value="/accueil?periode=mensuel&triePar=ratio"/>">Par ratio victoire/defaite</a></div>
+	  				<div class="col-md-3">
+	  					<a href="<c:url value="/accueil">
+	  								<c:param name="periode" value="mensuel" />
+	  								<c:param name="triePar" value="victoire" />
+	  							 </c:url>">Par victoire</a></div>
+	  				<div class="col-md-3">
+	  					<a href="<c:url value="/accueil">
+	  								<c:param name="periode" value="mensuel" />
+	  								<c:param name="triePar" value="defaite" />
+	  							 </c:url>">Par défaite</a></div>
+	  				<div class="col-md-6">
+	  					<a href="<c:url value="/accueil">
+	  								<c:param name="periode" value="mensuel" />
+	  								<c:param name="triePar" value="ratio" />
+	  							 </c:url>">Par ratio victoire/defaite</a></div>
 	  			</div>
 	  		</div>
 	  	</div>
 	  	<div class="tab-pane fade" id="nav-annuel" role="tabpanel" aria-labelledby="nav-annuel-tab">
 	  		<div class="container">
 	  			<div class="row" style="text-align:center;">
-	  				<div class="col-md-3"><a href="<c:url value="/accueil?periode=annuel&triePar=victoire"/>">Par victoire</a></div>
-					<div class="col-md-3"><a href="<c:url value="/accueil?periode=annuel&triePar=defaite"/>">Par defaite</a></div>
-					<div class="col-md-5"><a href="<c:url value="/accueil?periode=annuel&triePar=ratio"/>">Par ratio victoire/defaite</a></div>
+	  				<div class="col-md-3">
+	  					<a href="<c:url value="/accueil">
+	  								<c:param name="periode" value="annuel" />
+	  								<c:param name="triePar" value="victoire" />
+	  							 </c:url>">Par victoire</a></div>
+	  				<div class="col-md-3">
+	  					<a href="<c:url value="/accueil">
+	  								<c:param name="periode" value="annuel" />
+	  								<c:param name="triePar" value="defaite" />
+	  							 </c:url>">Par défaite</a></div>
+	  				<div class="col-md-6">
+	  					<a href="<c:url value="/accueil">
+	  								<c:param name="periode" value="annuel" />
+	  								<c:param name="triePar" value="ratio" />
+	  							 </c:url>">Par ratio victoire/defaite</a></div>
 	  			</div>	
 	  		</div>
 	  	</div>
